@@ -40,14 +40,15 @@ export default function Supplier() {
     navigate("/supplier");
 
   };
-  const handleChange = (e) => {
-    // setPrice(e.target.value);
-    // matrial.pricePerUnit = e.target.value;
-    // console.log(price);
+  const handleChange = (e,matrial) => {
+    
     const supplierData = { ...supdata };
     supplierData[e.target.name] = e.target.value;
     setSupdata(supplierData);
     console.log(supdata);
+    setPrice(e.target.value);
+    matrial.pricePerUnit = e.target.value;
+    console.log(price);
   };
 
   const handleRemoveMatrial = async (matrial) => {
@@ -150,31 +151,31 @@ export default function Supplier() {
                     value={supdata.address}
                   />
                 </div>
-                
+                {supplyMatraial.map((item) => (
+                  <div
+                    className="suppmatrial"
+                    key={item.materialId}
+                    style={{ display: "flex", gap: "20px" }}
+                  >
+                    <input type="text" value={item.materialName} />
+                    <input
+                      type="number"
+                      value={item.pricePerUnit}
+                      onChange={(e) => handleChange(e, item)}
+                      name="price"
+                    />
+                    <button
+                      className="deleteButtonrow"
+                      onClick={() => handleRemoveMatrial(item)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
                 <button className="supplierAddButton">Update</button>
 
               </form>
-              {supplyMatraial.map((item) => (
-                <div
-                  className="suppmatrial"
-                  key={item.materialId}
-                  style={{ display: "flex", gap: "20px" }}
-                >
-                  <input type="text" value={item.materialName} />
-                  <input
-                    type="number"
-                    value={item.pricePerUnit}
-                    onChange={(e) => handleChange(e, item)}
-                    name="price"
-                  />
-                  <button
-                    className="deleteButtonrow"
-                    onClick={() => handleRemoveMatrial(item)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
+        
             </div>
 
             <div className="supplierTopRight">
