@@ -62,15 +62,16 @@ function Sidebar() {
             <span>Employees</span>
             </Link>
           </li>
-          <li>
+        { 
+          // <li>
 
-            <Link to="/distributer" style={{ textDecoration: "none" }}>
+          //   <Link to="/distributer" style={{ textDecoration: "none" }}>
 
-            <PersonOutlineIcon className="icon" />
-            <span>Distributor</span>
-            </Link>
-          </li>
-          
+          //   <PersonOutlineIcon className="icon" />
+          //   <span>Distributor</span>
+          //   </Link>
+          // </li>
+        }
           <li>
           <Link to="/supplier" style={{ textDecoration: "none" }}>
 
@@ -88,13 +89,15 @@ function Sidebar() {
              
             </Link>
           </li>
-          <li>
-          <Link to="/customer" style={{ textDecoration: "none" }}>
+         {
+          //  <li>
+          // <Link to="/customer" style={{ textDecoration: "none" }}>
 
-            <PeopleAltIcon className="icon" />
-            <span>Customers</span>
-            </Link>
-          </li>
+          //   <PeopleAltIcon className="icon" />
+          //   <span>Customers</span>
+          //   </Link>
+          // </li>
+         }
           <p className="title">Products</p>
           <li>
           <Link to="/products" style={{ textDecoration: "none" }}>

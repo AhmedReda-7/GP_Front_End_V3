@@ -137,6 +137,13 @@ export const rawmatrialinventoryInputs = [
       type: "number",
       placeholder: "",
     },
+    {
+      id: 7,
+      label: "hasReachedROP",
+      name: "hasReachedROP",
+      type: "text",
+      placeholder: "",
+    },
     
     
   ];

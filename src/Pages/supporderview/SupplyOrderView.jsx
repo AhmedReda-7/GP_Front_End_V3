@@ -5,6 +5,7 @@ import "./supporderview.scss";
 import Navbar from "./../../Components/navbar/Navbar";
 import Sidebar from "./../../Components/sidebar/Sidebar";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default function SupplyOrderView() {
   const { supplierorderId } = useParams();
@@ -68,9 +69,18 @@ export default function SupplyOrderView() {
             orderedMaterials: supporderdata.orderedMaterials
           }
         )
+        
+        Swal.fire({
+          icon: 'success',
+          title: 'Changed!',
+          text: `OrderStatus has been Changed To Shipped.`,
+          showConfirmButton: false,
+          timer: 1500
+          });
+
               console.log("abc")
 
-        //  navigate("/manufactur");
+          navigate("/supplierorders");
       });
   }
   async function handlefulfilled() {
@@ -97,8 +107,15 @@ setSupporderdata(
   
   }
 )
+Swal.fire({
+  icon: 'success',
+  title: 'Changed!',
+  text: `OrderStatus has been Changed To fullfilled.`,
+  showConfirmButton: false,
+  timer: 1500
+  });
       console.log("abc")
-        // navigate("/manufactur");
+         navigate("/supplierorders");
       });
   }
   return (

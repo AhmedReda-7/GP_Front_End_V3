@@ -250,6 +250,11 @@ export const rawmatrialinventoryCoulm =[
     headerName: "reorderingPoint",
     width: 120,
   },
+  {
+    field: "hasReachedROP",
+    headerName: "hasReachedROP",
+    width: 120,
+  },
 
   
 ];

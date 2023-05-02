@@ -3,9 +3,13 @@ import Sidebar from './../../Components/sidebar/Sidebar';
 import Navbar from './../../Components/navbar/Navbar';
 import { useState } from "react";
 import  axios  from 'axios';
+import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 
 function NewmatrialInventory({ inputs, title }) {
   const [file, setFile] = useState("");
+  const navigate = useNavigate();
+
   const [rawmatrialinventory,setRawmatrialinventory] = useState({
  rawmatrialinventoryName: "",
   rawmatrialinventoryDescription: ""})
@@ -23,6 +27,7 @@ function NewmatrialInventory({ inputs, title }) {
   
    }
    const res = await axios.post (`https://localhost:44393/api/AddNewRawMaterialToInventory`,rawmatrialinventoryData)
+   navigate("/rawmatrialinventory");
 
 // console.log('====================================');
 // console.log(res);
@@ -32,6 +37,13 @@ function NewmatrialInventory({ inputs, title }) {
     e.preventDefault();
  
     sendData();
+    Swal.fire({
+      icon: 'success',
+      title: 'Added!',
+      text: `${rawmatrialinventory.rawmatrialinventoryName} has been Added.`,
+      showConfirmButton: false,
+      timer: 1500
+  });
 
   }
   return (

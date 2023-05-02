@@ -3,9 +3,13 @@ import Sidebar from './../../Components/sidebar/Sidebar';
 import Navbar from './../../Components/navbar/Navbar';
 import { useState } from "react";
 import  axios  from 'axios';
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function NewCategory({ inputs, title }) {
   const [file, setFile] = useState("");
+  const navigate = useNavigate();
+
   const [category,setCategory] = useState({
  categoryName: "",
   categoryDescription: ""})
@@ -23,6 +27,8 @@ function NewCategory({ inputs, title }) {
   
    }
    const res = await axios.post (`https://localhost:44393/api/AddNewCategory`,categoryData)
+   navigate("/category");
+
 
 // console.log('====================================');
 // console.log(res);
@@ -32,6 +38,16 @@ function NewCategory({ inputs, title }) {
     e.preventDefault();
  
     sendData();
+
+
+      Swal.fire({
+      icon: 'success',
+      title: 'Added!',
+      text: `${category.categoryName} has been Added.`,
+      showConfirmButton: false,
+      timer: 1500
+  });
+
 
   }
   return (

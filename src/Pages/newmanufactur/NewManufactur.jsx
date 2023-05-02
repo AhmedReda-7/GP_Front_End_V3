@@ -2,6 +2,8 @@ import "./newmanufactur.scss";
 import Sidebar from "./../../Components/sidebar/Sidebar";
 import Navbar from "./../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import axios from "axios";
 import ProductInventoryContext from "../../context/ProductInventoryContext";
 import RowMaterial from "./RowMaterial/RowMaterial";
@@ -9,6 +11,7 @@ import RowMaterial from "./RowMaterial/RowMaterial";
 function NewManufactur({ inputs, title }) {
   const [file, setFile] = useState("");
   const { getProductInventory, data } = useContext(ProductInventoryContext);
+  const navigate = useNavigate();
 
   const [manufactur, setManufactur] = useState({
     productManufacturedId: 0,
@@ -62,13 +65,16 @@ function NewManufactur({ inputs, title }) {
   async function sendData() {
     try {
       const res = await axios.post(
-        `https://localhost:44393/api/CreateManufacturingOrder`,
-        manufactur
+        `https://localhost:44393/api/CreateManufacturingOrder`,manufactur
+       
       );
+      navigate("/manufactur");
       console.log(res);
 
       const data = await res.json();
       console.log(data);
+      
+
     } catch (err) {
       console.log("error ", err);
     }
@@ -88,6 +94,13 @@ function NewManufactur({ inputs, title }) {
     e.preventDefault();
 
     sendData();
+    Swal.fire({
+      icon: 'success',
+      title: 'Added!',
+      text: `${manufactur.productManufacturedId} has been Added.`,
+      showConfirmButton: false,
+      timer: 1500
+  });
   };
 
   const renderedRowMaterials = manufactur.rawMaterialsUsed.map(

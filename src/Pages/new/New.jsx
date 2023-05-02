@@ -4,6 +4,7 @@ import { useState } from "react";
 import Sidebar from './../../Components/sidebar/Sidebar';
 import Navbar from './../../Components/navbar/Navbar';
 import  axios  from 'axios';
+import Swal from 'sweetalert2';
 
 function New({ inputs, title }) {
   const [file, setFile] = useState("");
@@ -39,7 +40,13 @@ function New({ inputs, title }) {
   const handleSubmit = (e) =>{
     e.preventDefault();
     sendData();
-
+  //   Swal.fire({
+  //     icon: 'success',
+  //     title: 'Added!',
+  //     text: `${employee.employeeFullName} has been Added.`,
+  //     showConfirmButton: false,
+  //     timer: 1500
+  // });
 
   }
   return (

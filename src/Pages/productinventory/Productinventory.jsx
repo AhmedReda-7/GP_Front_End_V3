@@ -1,4 +1,4 @@
-import { Link ,useParams} from "react-router-dom";
+import { Link ,useParams,useNavigate} from "react-router-dom";
 import "./productinventory.css";
 import Charts from "../../Components/Chart/Charts";
 import PublishIcon from '@mui/icons-material/Publish';
@@ -6,9 +6,11 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from './../../Components/navbar/Navbar';
 import { useContext ,useEffect,useState} from 'react';
 import ProductInventoryContext from "../../context/ProductInventoryContext";
+import Swal from 'sweetalert2';
 
 export default function Productinventory() {
     const {productinventoryId} = useParams(); 
+    const navigate = useNavigate();
 
    const {handleupdate,getProductInventoryById} = useContext (ProductInventoryContext);
    const [proinventorydata,setProinventorydata,] = useState({
@@ -27,6 +29,15 @@ export default function Productinventory() {
  {
    e.preventDefault();
    handleupdate(proinventorydata);
+   Swal.fire({
+    icon: 'success',
+    title: 'Updated!',
+    text: `${proinventorydata.productName} has been updated.`,
+    showConfirmButton: false,
+    timer: 2000
+  });
+   navigate("/productsinventory");
+
 
  }
  const handleChange = (e) =>

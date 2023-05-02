@@ -1,20 +1,39 @@
-import { Link ,useParams} from "react-router-dom";
+import { Link ,useParams,useNavigate} from "react-router-dom";
 import "./product.css";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from './../../Components/navbar/Navbar';
 import { useContext ,useEffect,useState} from 'react';
 import AllproductContext from "../../context/AllproductContext";
+import Swal from 'sweetalert2';
 
 
 export default function Product() {
     const {productId} = useParams(); 
     const {handleupdate,getProductById} = useContext (AllproductContext);
-    const [prodata,setProdata] = useState({});
+    const [prodata,setProdata] = useState({
+      
+        productName: "string",
+        productDescription: "string",
+        purchasePrice: 0,
+        salesPrice:0,
+        categoryId:0
+      
+    });
+    const navigate = useNavigate();
 
   const handleSubmit = (e) =>
   {
     e.preventDefault();
     handleupdate(productId,prodata);
+    Swal.fire({
+      icon: 'success',
+      title: 'Updated!',
+      text: `${prodata.productName} has been updated.`,
+      showConfirmButton: false,
+      timer: 2000
+    });
+    navigate("/products");
+
  
   }
   const handleChange = (e) =>

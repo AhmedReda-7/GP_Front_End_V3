@@ -6,6 +6,8 @@ import axios from "axios";
 import SupplierContext from "../../context/SupplierContext";
 import RowMaterial from "./RowMaterial/RowMaterial";
 import RawMatrialContext from "../../context/RawMatrialContext";
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function NewSupplierorder({ inputs, title }) {
   const [file, setFile] = useState("");
@@ -13,7 +15,8 @@ function NewSupplierorder({ inputs, title }) {
   const { data: allRowMaterial } = useContext(RawMatrialContext);
   const {getSupllierById ,getSuplliermatrialById} = useContext (SupplierContext);
   const [supplyMatraial, setSupplyMatraial] = useState([]);
-  
+  const navigate = useNavigate();
+
 
   const [supporder, setSupporder] = useState({
     id: 0,
@@ -114,10 +117,12 @@ function NewSupplierorder({ inputs, title }) {
         `https://localhost:44393/api/OrderRawMaterialFromSupplier?supplierId=${id}&shippingCost=${cost}`,
         supporder.orderedMaterials
       );
-      console.log(res);
+      navigate("/supplierorders");
 
-      const data = await res.json();/*  */
-      console.log(data);
+      // console.log(res);
+
+      // const data = await res.json();/*  */
+      // console.log(data);
     } catch (err) {
       console.log("error ", err);
     }
@@ -139,6 +144,14 @@ function NewSupplierorder({ inputs, title }) {
     e.preventDefault();
 
     sendData(supporder.supplierId,supporder.shippingCost);
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Added!',
+      text: `Supplier order has been Added.`,
+      showConfirmButton: false,
+      timer: 1500
+  });
   };
 
   

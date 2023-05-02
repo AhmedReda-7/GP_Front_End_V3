@@ -5,6 +5,7 @@ import "./manufacureview.scss";
 import Navbar from "./../../Components/navbar/Navbar";
 import Sidebar from "./../../Components/sidebar/Sidebar";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default function ManufactureView() {
   const { manufacturId } = useParams();
@@ -60,9 +61,19 @@ export default function ManufactureView() {
             manufacturingOrderDetails: manufacturdata.manufacturingOrderDetails
           }
         )
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Changed!',
+          text: `manufacturingStatus has been Changed To ShippedToInventory.`,
+          showConfirmButton: false,
+          timer: 1500
+          });
+
+
               console.log("abc")
 
-        //  navigate("/manufactur");
+         navigate("/manufactur");
       });
   }
   async function handleManufacture() {
@@ -86,8 +97,16 @@ setManufacturedata(
   
   }
 )
+Swal.fire({
+icon: 'success',
+title: 'Changed!',
+text: `manufacturingStatus has been Changed To Manufacturing.`,
+showConfirmButton: false,
+timer: 1500
+});
+
       console.log("abc")
-        // navigate("/manufactur");
+        navigate("/manufactur");
       });
   }
   return (

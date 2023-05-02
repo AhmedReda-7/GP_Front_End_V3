@@ -1,5 +1,6 @@
 import { createContext, useState  } from 'react';
 import axios  from 'axios';
+import Swal from 'sweetalert2';
 
 
 const CategoryContext = createContext ();
@@ -24,10 +25,35 @@ export function CategoryContextProvider({children})
        
  }
     const handleDelete = (id) => {
-       deleteCategory(id);
-getAllcategory();
-       
-        
+
+       Swal.fire({
+              icon: 'warning',
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              showCancelButton: true,
+              confirmButtonText: 'Yes, delete it!',
+              cancelButtonText: 'No, cancel!',
+          }).then(result => {
+              if (result.value) {
+                  const [employee] = data.filter(employee => employee.id === id);
+  
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Deleted!',
+                      text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
+                      showConfirmButton: false,
+                      timer: 2000,
+                  });
+
+
+
+
+
+  
+}
+});
+deleteCategory(id);
+getAllcategory();  
       };
  async function updateCategory(id,updatedData)
  {

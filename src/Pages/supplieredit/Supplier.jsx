@@ -1,13 +1,16 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams ,useNavigate} from "react-router-dom";
 import "./supplier.css";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "./../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
 import SupplierContext from "../../context/SupplierContext";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default function Supplier() {
   const { supplierId } = useParams();
+  const navigate = useNavigate();
+
   const [supplyMatraial, setSupplyMatraial] = useState([]);
   const [price, setPrice] = useState("");
   const { handleupdate, getSupllierById, getSuplliermatrialById } =
@@ -23,14 +26,24 @@ export default function Supplier() {
   console.log("====================================");
   console.log(supplierId);
   console.log("====================================");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleupdate(supplierId, supdata);
+    Swal.fire({
+      icon: 'success',
+      title: 'Updated!',
+      text: `${supdata.supplierName} has been updated.`,
+      showConfirmButton: false,
+      timer: 2000
+    });
+    navigate("/supplier");
+
   };
-  const handleChange = (e, matrial) => {
-    setPrice(e.target.value);
-    matrial.pricePerUnit = e.target.value;
-    console.log(price);
+  const handleChange = (e) => {
+    // setPrice(e.target.value);
+    // matrial.pricePerUnit = e.target.value;
+    // console.log(price);
     const supplierData = { ...supdata };
     supplierData[e.target.name] = e.target.value;
     setSupdata(supplierData);
@@ -137,29 +150,31 @@ export default function Supplier() {
                     value={supdata.address}
                   />
                 </div>
-                {supplyMatraial.map((item) => (
-                  <div
-                    className="suppmatrial"
-                    key={item.materialId}
-                    style={{ display: "flex", gap: "20px" }}
-                  >
-                    <input type="text" value={item.materialName} />
-                    <input
-                      type="number"
-                      value={item.pricePerUnit}
-                      onChange={(e) => handleChange(e, item)}
-                      name="price"
-                    />
-                    <button
-                      className="deleteButtonrow"
-                      onClick={() => handleRemoveMatrial(item)}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
+                
                 <button className="supplierAddButton">Update</button>
+
               </form>
+              {supplyMatraial.map((item) => (
+                <div
+                  className="suppmatrial"
+                  key={item.materialId}
+                  style={{ display: "flex", gap: "20px" }}
+                >
+                  <input type="text" value={item.materialName} />
+                  <input
+                    type="number"
+                    value={item.pricePerUnit}
+                    onChange={(e) => handleChange(e, item)}
+                    name="price"
+                  />
+                  <button
+                    className="deleteButtonrow"
+                    onClick={() => handleRemoveMatrial(item)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
             </div>
 
             <div className="supplierTopRight">

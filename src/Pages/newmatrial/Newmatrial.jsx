@@ -3,9 +3,13 @@ import Sidebar from './../../Components/sidebar/Sidebar';
 import Navbar from './../../Components/navbar/Navbar';
 import { useState } from "react";
 import  axios  from 'axios';
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function Newmatrial({ inputs, title }) {
   const [file, setFile] = useState("");
+  const navigate = useNavigate();
+
   const [rawmatrial,setRawmatrial] = useState({
     materialName: "",
     materialDescription: ""})
@@ -22,7 +26,9 @@ function Newmatrial({ inputs, title }) {
     
   
    }
-   const res = await axios.post (`https://localhost:44393/api/AddNewRawMaterial`,rawmatrialData)
+   const res = await axios.post (`https://localhost:44393/api/AddNewRawMaterial`,rawmatrialData);
+   navigate("/rawmatrial");
+
 
 // console.log('====================================');
 // console.log(res);
@@ -32,7 +38,13 @@ function Newmatrial({ inputs, title }) {
     e.preventDefault();
  
     sendData();
-
+    Swal.fire({
+      icon: 'success',
+      title: 'Added!',
+      text: `${rawmatrial.materialName} has been Added.`,
+      showConfirmButton: false,
+      timer: 2000
+  });
   }
   return (
     <div className="newrawmatrial">

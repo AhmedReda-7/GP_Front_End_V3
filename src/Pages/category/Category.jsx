@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,useNavigate } from "react-router-dom";
 import "./category.css";
 import Charts from "../../Components/Chart/Charts";
 import PublishIcon from '@mui/icons-material/Publish';
@@ -6,9 +6,12 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from './../../Components/navbar/Navbar';
 import { useContext ,useEffect,useState} from 'react';
 import CategoryContext from "../../context/CategoryContext";
+import Swal from 'sweetalert2';
 
 export default function Category() {
    const {categoryId} = useParams(); 
+   const navigate = useNavigate();
+
    const {handleupdate,getCategoryById} = useContext (CategoryContext);
    const [catdata,setCatdata] = useState({
     categoryName: "string",
@@ -19,6 +22,15 @@ export default function Category() {
  {
    e.preventDefault();
    handleupdate(categoryId,catdata);
+   Swal.fire({
+    icon: 'success',
+    title: 'Updated!',
+    text: `${catdata.categoryName} has been updated.`,
+    showConfirmButton: false,
+    timer: 2000
+  });
+   navigate("/category");
+
 
  }
  const handleChange = (e) =>

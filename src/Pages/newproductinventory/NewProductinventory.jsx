@@ -3,9 +3,13 @@ import Sidebar from './../../Components/sidebar/Sidebar';
 import Navbar from './../../Components/navbar/Navbar';
 import  axios  from 'axios';
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 export default function NewProductinventoryinventory({ inputs, title }) {
   const [file, setFile] = useState("");
+  const navigate = useNavigate();
+
   const [newdatainventory,setNewdatainventory] = useState({
     productId: 0,
   quantity: 0,
@@ -28,6 +32,7 @@ export default function NewProductinventoryinventory({ inputs, title }) {
   
    }
    const res = await axios.post (`https://localhost:44393/api/AddAProductToInventory`,newDataInventory)
+      navigate("/productsinventory");
 
 // console.log('====================================');
 // console.log(res);
@@ -37,7 +42,13 @@ export default function NewProductinventoryinventory({ inputs, title }) {
     e.preventDefault();
  
     sendData();
-
+    Swal.fire({
+      icon: 'success',
+      title: 'Added!',
+      text: `${newdatainventory.productId} has been Added.`,
+      showConfirmButton: false,
+      timer: 1500
+  });
   }
   return (
     <div className="NewProductinventory">

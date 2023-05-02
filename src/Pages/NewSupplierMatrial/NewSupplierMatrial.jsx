@@ -3,6 +3,7 @@ import Sidebar from "./../../Components/sidebar/Sidebar";
 import Navbar from "./../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 import axios from "axios";
 import ProductInventoryContext from "../../context/ProductInventoryContext";
@@ -10,7 +11,9 @@ import RowMatrialSupply from "./RowMatrialSupply/RowMatrialSupply";
 import SupplierContext from "../../context/SupplierContext";
 
 function NewSupplierMatrial({ title ,inputs}) {
-  console.log(document.getElementById("form"))
+  console.log(document.getElementById("form"));
+  const navigate = useNavigate();
+
   const [file, setFile] = useState("");
   const { getProductInventory  } = useContext(ProductInventoryContext);
   const { getSuplliermatrialById} = useContext(SupplierContext);
@@ -77,6 +80,8 @@ const [viewsppmatrial ,setViewsppmatrial] =useState([]);
         `https://localhost:44393/api/AddNewSupplyingMaterialToSupplier?supplierId=${id}`,
         supplyMatraial
       );
+      navigate("/supplier");
+
       console.log(res);
 
       const data = await res.json();
@@ -100,6 +105,14 @@ const [viewsppmatrial ,setViewsppmatrial] =useState([]);
      e.preventDefault();
 // console.log(id)
     sendData(suppliermatrialId);
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Added!',
+      text: `supplyMatraial has been Added.`,
+      showConfirmButton: false,
+      timer: 1500
+  });
   };
 
   const renderedRowMaterials = supplyMatraial.supplyingMaterialDetails.map(

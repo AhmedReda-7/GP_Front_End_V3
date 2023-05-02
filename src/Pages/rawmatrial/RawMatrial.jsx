@@ -1,4 +1,4 @@
-import { Link ,useParams} from "react-router-dom";
+import { Link ,useParams,useNavigate} from "react-router-dom";
 import "./rawmatrial.css";
 import Charts from "../../Components/Chart/Charts";
 import PublishIcon from '@mui/icons-material/Publish';
@@ -6,16 +6,32 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from './../../Components/navbar/Navbar';
 import { useContext ,useEffect,useState} from 'react';
 import RawMatrialContext from "../../context/RawMatrialContext";
+import Swal from 'sweetalert2';
 
 export default function RawMatrial() {
   const {materialId} = useParams(); 
   const {handleupdate,getRawmatrialById} = useContext (RawMatrialContext);
-  const [rawdata,setRawdata] = useState({});
+  const [rawdata,setRawdata] = useState({
+
+    
+  materialName: "string",
+  materialDescription: "string"
+  });
+  const navigate = useNavigate();
 
 const handleSubmit = (e) =>
 {
   e.preventDefault();
   handleupdate(materialId,rawdata);
+  Swal.fire({
+    icon: 'success',
+    title: 'Updated!',
+    text: `${rawdata.materialName} has been updated.`,
+    showConfirmButton: false,
+    timer: 2000
+  });
+  navigate("/rawmatrial");
+
 
 }
 const handleChange = (e) =>
