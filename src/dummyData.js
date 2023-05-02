@@ -330,3 +330,164 @@ export const supporderCoulm =[
     width: 180,
   }
 ];
+export const accountCoulm = [
+  { field: "accId", headerName: "accId", width: 100 },
+
+  {
+    field: "accName",
+
+    headerName: "accountName",
+
+    width: 180,
+  },
+
+  {
+    field: "accBalance",
+
+    headerName: "accountBalance",
+
+    width: 200,
+  },
+  {
+    field: "accCredit",
+
+    headerName: "accountCredit",
+
+    width: 200,
+  },
+  {
+    field: "accDebit",
+
+    headerName: "accountDebit",
+
+    width: 200,
+  },
+  {
+    field: "increaseMode",
+
+    headerName: "increaseMode",
+
+    width: 200,
+  },
+];
+
+export const journalCoulm = [
+  { field: "jeid", headerName: "journal id", width: 100 },
+
+  {
+    field: "jename",
+
+    headerName: "Journal Name",
+
+    width: 180,
+  },
+
+  {
+    field: "jedescription",
+
+    headerName: "Journal Description",
+
+    width: 200,
+  },
+  {
+    field: "jecredit",
+
+    headerName: "Credit",
+
+    width: 200,
+  },
+  {
+    field: "jedebit",
+
+    headerName: "Debit",
+
+    width: 200,
+  },
+  {
+    field: "jedate",
+
+    headerName: "Journal Date",
+
+    width: 200,
+  },
+  {
+    field: "jeaccount1",
+
+    headerName: "Account Credit",
+
+    width: 150,
+  },
+  {
+    field: "jeaccount2",
+
+    headerName: "Deibt Credit",
+
+    width: 150,
+  },
+];
+
+export const fmsCategoryCoulm = [
+  { field: "catId", headerName: "Category id", width: 100 },
+
+  {
+    field: "catName",
+
+    headerName: "Category Name",
+
+    width: 250,
+  },
+
+  {
+    field: "catDescription",
+
+    headerName: "Category Description",
+
+    width: 400,
+  },
+];
+
+export const statementCoulm = [
+  { field: "staId", headerName: "Statement id", width: 100 },
+
+  {
+    field: "staName",
+
+    headerName: "Statement Name",
+
+    width: 250,
+  },
+
+  {
+    field: "staBalance",
+
+    headerName: "Statement Balance",
+
+    width: 400,
+  },
+  {
+    field: "staDate",
+
+    headerName: "Statement Date",
+
+    width: 400,
+  },
+];
+
+export const templateCoulm = [
+  { field: "tempId", headerName: "Template id", width: 200 },
+
+  {
+    field: "tempName",
+
+    headerName: "Template Name",
+
+    width: 300,
+  },
+  {
+    field: "tempDate",
+
+    headerName: "Template Date",
+
+    width: 300,
+  },
+];
