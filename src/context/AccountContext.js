@@ -6,7 +6,15 @@ const AccountContext = createContext();
 
 export function AccountContextProvider({ children }) {
   const [data, setData] = useState([]);
-  const [detailData, setDetailData] = useState([]);
+  const [account,setAccount] = useState({})
+  const [detailData, setDetailData] = useState({
+    accId: "",
+    accBalance: account.accBalance,
+    accDebit: account.accDebit,
+    accCredit: account.accCredit,
+    accName: account.accName,
+    increaseMode: account.increaseMode,
+  });
 
   async function getAllaccount() {
     const allaccount = await axios.get(
@@ -22,6 +30,7 @@ export function AccountContextProvider({ children }) {
     );
 
     setDetailData(accountObject.data);
+    setAccount(accountObject.data);
   }
 
   async function deleteAccount(id) {
@@ -52,6 +61,7 @@ export function AccountContextProvider({ children }) {
   const valuetoshare = {
     data,
     detailData,
+    account,
     getAllaccount,
     handleDelete,
     handleupdate,

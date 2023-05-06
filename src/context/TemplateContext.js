@@ -6,7 +6,12 @@ const TemplateContext = createContext();
 
 export function TemplateContextProvider({ children }) {
   const [data, setData] = useState([]);
-  const [detailData, setDetailData] = useState([]);
+  const [template, settemplate] = useState([]);
+  const [detailData, setDetailData] = useState({
+    tempId: "",
+    tempName: template.tempName,
+    tempDate: template.tempDate,
+  });
 
   async function getAlltemplate() {
     const alltemplate = await axios.get(
@@ -22,6 +27,7 @@ export function TemplateContextProvider({ children }) {
     );
 
     setDetailData(templateObject.data);
+    settemplate(templateObject.data.accounts);
   }
 
   async function deleteTemplate(id) {
@@ -52,6 +58,7 @@ export function TemplateContextProvider({ children }) {
   const valuetoshare = {
     data,
     detailData,
+    template,
     getAlltemplate,
     handleDelete,
     handleupdate,

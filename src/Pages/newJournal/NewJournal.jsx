@@ -4,8 +4,18 @@ import Navbar from "../../Components/navbar/Navbar";
 import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import AccountContext from "../../context/AccountContext";
+import { useEffect } from "react";
 
 function NewJournal() {
+
+  const { data, getAllaccount } = useContext(AccountContext);
+
+  useEffect(() => {
+    getAllaccount();
+  }, []);
+
   const [journal, setjournal] = useState({
     jename: "",
     jedescription: "",
@@ -81,6 +91,30 @@ function NewJournal() {
     }
     sendData();
   };
+
+  const newtempOrderOptions = data.map((temp) => {
+    return (
+      <option
+        value={temp.accId}
+        key={temp.accId}
+        selected={journal.jeaccount1 === temp.accId}
+      >
+        Id: {temp.accId} -- Name: {temp.accName}
+      </option>
+    );
+  });
+  const newtempOrderOptions2 = data.map((temp) => {
+    return (
+      <option
+        value={temp.accId}
+        key={temp.accId}
+        selected={journal.jeaccount2 === temp.accId}
+      >
+        Id: {temp.accId} -- Name: {temp.accName}
+      </option>
+    );
+  });
+
   
   return (
     <div className="newProduct">
@@ -132,23 +166,25 @@ function NewJournal() {
             </div>
             <div className="addProductItem">
               <label>Credit Account</label>
-              <input
-                type="number"
+              <select
                 name="jeaccount1"
                 value={journal.jeaccount1}
                 onChange={handleInputChange}
-                placeholder=""
-              />
+              >
+                <option value="">Select an Account</option>
+                {newtempOrderOptions}
+              </select>
             </div>
             <div className="addProductItem">
               <label>Debit Account</label>
-              <input
-                type="number"
+              <select
                 name="jeaccount2"
                 value={journal.jeaccount2}
                 onChange={handleInputChange}
-                placeholder=""
-              />
+              >
+                <option value="">Select an Account</option>
+                {newtempOrderOptions2}
+              </select>
             </div>
             <div className="addProductItem">
               <label>Date</label>

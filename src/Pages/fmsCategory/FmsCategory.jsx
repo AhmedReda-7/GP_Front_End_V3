@@ -26,10 +26,10 @@ export default function FmsCategory() {
       renderCell: (params) => {
         return (
           <div>
-            <Link to={"/category/view/" + params.row.catId}>
+            <Link to={"/fmscategory/view/" + params.row.catId}>
               <button className="productListEdit">View</button> 
             </Link>
-            <Link to={"/category/" + params.row.catId}>
+            <Link to={"/fmscategory/" + params.row.catId}>
               <button className="productListEdit">Edit</button> 
             </Link>
 
@@ -51,7 +51,7 @@ export default function FmsCategory() {
         <div className="datatable">
           <div className="datatableTitle">
             Categories
-            <Link to="/category/newcategory" className="link">
+            <Link to="/fmscategory/fmsnewcategory" className="link">
               Add New
             </Link>
           </div>

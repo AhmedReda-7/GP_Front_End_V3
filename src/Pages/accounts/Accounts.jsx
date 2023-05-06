@@ -1,6 +1,5 @@
 import "./Accounts.css";
 import { DataGrid } from "@mui/x-data-grid";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { accountCoulm } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useEffect, useContext } from "react";
@@ -9,7 +8,7 @@ import Navbar from "../../Components/navbar/Navbar";
 import AccountContext from "../../context/AccountContext";
 
 export default function Accounts() {
-  const { getAllaccount, data, handleDelete } = useContext(AccountContext);
+  const { getAllaccount, data} = useContext(AccountContext);
 
   useEffect(() => {
     getAllaccount();
@@ -32,10 +31,6 @@ export default function Accounts() {
             <Link to={"/accounts/" + params.row.accId}>
               <button className="productListEdit">Edit</button> 
             </Link>
-            <DeleteOutlineIcon
-              className="productListDelete"
-              onClick={() => handleDelete(params.row.accId)}
-            />
           </div>
         );
       },

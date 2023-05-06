@@ -6,7 +6,13 @@ const StatementContext = createContext();
 
 export function StatementContextProvider({ children }) {
   const [data, setData] = useState([]);
-  const [detailData, setDetailData] = useState([]);
+  const [statement, setstatement] = useState({});
+  const [detailData, setDetailData] = useState({
+    staId: "",
+    staBalance: statement.staBalance,
+    staName: statement.staName,
+    staDate: statement.staDate,
+  });
 
   async function getAllstatement() {
     const allstatement = await axios.get(
@@ -22,6 +28,7 @@ export function StatementContextProvider({ children }) {
     );
 
     setDetailData(statementObject.data);
+    setstatement(statementObject.data);
   }
 
   async function deleteStatement(id) {
@@ -52,6 +59,7 @@ export function StatementContextProvider({ children }) {
   const valuetoshare = {
     data,
     detailData,
+    statement,
     getAllstatement,
     handleDelete,
     handleupdate,

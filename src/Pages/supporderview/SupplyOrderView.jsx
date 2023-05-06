@@ -5,13 +5,13 @@ import "./supporderview.scss";
 import Navbar from "./../../Components/navbar/Navbar";
 import Sidebar from "./../../Components/sidebar/Sidebar";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export default function SupplyOrderView() {
   const { supplierorderId } = useParams();
   const navigate = useNavigate();
   const { GetSupplierOrderById } = useContext(SupplierorderContext);
-  
+
   const [supporderdata, setSupporderdata] = useState({
     id: 0,
     supplierId: 0,
@@ -30,16 +30,13 @@ export default function SupplyOrderView() {
         materialName: "",
         salesPrice: 0,
         quantity: 0,
-        price: 0
-      }
-    ]
+        price: 0,
+      },
+    ],
   });
 
   async function getsupporder() {
     const supplyorder = await GetSupplierOrderById(supplierorderId);
-    // console.log("====================================");
-    // console.log(supplyorder);
-    // console.log("====================================");
     setSupporderdata(supplyorder.data);
   }
 
@@ -53,34 +50,32 @@ export default function SupplyOrderView() {
         `https://localhost:44393/api/ChangeSupplierOrderStatusToShipped?orderId=${supplierorderId}`
       )
       .then((res) => {
-        setSupporderdata(
-          {
-            id: supporderdata.id,
-            supplierId: supporderdata.supplierId,
-            supplierName: supporderdata.supplierName,
-            totalQty: supporderdata.totalQty,
-            subTotalPrice:  supporderdata.subTotalPrice,
-            shippingCost:  supporderdata.shippingCost,
-            totalPrice:  supporderdata.totalPrice,
-            orderStatusId:  supporderdata.orderStatusId,
-            orderStatus: "shipped",
-            orderingDate: supporderdata.orderingDate,
-            expectedArrivalDate: supporderdata.expectedArrivalDate,
-            orderedMaterials: supporderdata.orderedMaterials
-          }
-        )
-        
+        setSupporderdata({
+          id: supporderdata.id,
+          supplierId: supporderdata.supplierId,
+          supplierName: supporderdata.supplierName,
+          totalQty: supporderdata.totalQty,
+          subTotalPrice: supporderdata.subTotalPrice,
+          shippingCost: supporderdata.shippingCost,
+          totalPrice: supporderdata.totalPrice,
+          orderStatusId: supporderdata.orderStatusId,
+          orderStatus: "shipped",
+          orderingDate: supporderdata.orderingDate,
+          expectedArrivalDate: supporderdata.expectedArrivalDate,
+          orderedMaterials: supporderdata.orderedMaterials,
+        });
+
         Swal.fire({
-          icon: 'success',
-          title: 'Changed!',
+          icon: "success",
+          title: "Changed!",
           text: `OrderStatus has been Changed To Shipped.`,
           showConfirmButton: false,
-          timer: 1500
-          });
+          timer: 1500,
+        });
 
-              console.log("abc")
+        console.log("abc");
 
-          navigate("/supplierorders");
+        navigate("/supplierorders");
       });
   }
   async function handlefulfilled() {
@@ -89,33 +84,29 @@ export default function SupplyOrderView() {
         `https://localhost:44393/api/ChangeSupplierOrderStatusToFullfilled?orderId=${supplierorderId}`
       )
       .then((res) => {
-setSupporderdata(
-  {
-            id: supporderdata.id,
-            supplierId: supporderdata.supplierId,
-            supplierName: supporderdata.supplierName,
-            totalQty: supporderdata.totalQty,
-            subTotalPrice:  supporderdata.subTotalPrice,
-            shippingCost:  supporderdata.shippingCost,
-            totalPrice:  supporderdata.totalPrice,
-            orderStatusId:  supporderdata.orderStatusId,
-            orderStatus: "fullfilled",
-            orderingDate: supporderdata.orderingDate,
-            expectedArrivalDate: supporderdata.expectedArrivalDate,
-            orderedMaterials: supporderdata.orderedMaterials
-      
-  
-  }
-)
-Swal.fire({
-  icon: 'success',
-  title: 'Changed!',
-  text: `OrderStatus has been Changed To fullfilled.`,
-  showConfirmButton: false,
-  timer: 1500
-  });
-      console.log("abc")
-         navigate("/supplierorders");
+        setSupporderdata({
+          id: supporderdata.id,
+          supplierId: supporderdata.supplierId,
+          supplierName: supporderdata.supplierName,
+          totalQty: supporderdata.totalQty,
+          subTotalPrice: supporderdata.subTotalPrice,
+          shippingCost: supporderdata.shippingCost,
+          totalPrice: supporderdata.totalPrice,
+          orderStatusId: supporderdata.orderStatusId,
+          orderStatus: "fullfilled",
+          orderingDate: supporderdata.orderingDate,
+          expectedArrivalDate: supporderdata.expectedArrivalDate,
+          orderedMaterials: supporderdata.orderedMaterials,
+        });
+        Swal.fire({
+          icon: "success",
+          title: "Changed!",
+          text: `OrderStatus has been Changed To fullfilled.`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log("abc");
+        navigate("/supplierorders");
       });
   }
   return (
@@ -133,10 +124,10 @@ Swal.fire({
           <div className="manufacturTop">
             <div className="manufacturTopRight">
               <div className="manufacturInfoTop">
-              <p className="categoryName">
-                <span className="spanform">supplierName: </span>
-                {supporderdata.supplierName}
-              </p>
+                <p className="categoryName">
+                  <span className="spanform">supplierName: </span>
+                  {supporderdata.supplierName}
+                </p>
                 <p className="paddorder">
                   <span className="spanform">id: </span>
                   {supporderdata.id}
@@ -181,22 +172,41 @@ Swal.fire({
               </div>
               <h3>Order Status:</h3>
               <div
-              style={{ display: "flex", gap: "50px", marginBottom: "20px" }}
+                style={{ display: "flex", gap: "50px", marginBottom: "20px" }}
               >
-              <button className="manufacturEdit1" onClick={handleShipped} 
-              style={{color : supporderdata.orderStatus==="pending"?"blue":"lightgray"}} 
-              disabled={ supporderdata.orderStatus!=="pending"?true:false}>
-              Shipped
-              </button>
-              <button className="manufacturEdit2" onClick={handlefulfilled}
-              style={{color : supporderdata.orderStatus!=="fullfilled"?"blue":"lightgray"}} 
-              disabled={ supporderdata.orderStatus==="fullfilled"?true:false}
-              >
-              fulfilled
-              </button>
+                <button
+                  className="manufacturEdit1"
+                  onClick={handleShipped}
+                  style={{
+                    color:
+                      supporderdata.orderStatus === "pending"
+                        ? "blue"
+                        : "lightgray",
+                  }}
+                  disabled={
+                    supporderdata.orderStatus !== "pending" ? true : false
+                  }
+                >
+                  Shipped
+                </button>
+                <button
+                  className="manufacturEdit2"
+                  onClick={handlefulfilled}
+                  style={{
+                    color:
+                      supporderdata.orderStatus !== "fullfilled"
+                        ? "blue"
+                        : "lightgray",
+                  }}
+                  disabled={
+                    supporderdata.orderStatus === "fullfilled" ? true : false
+                  }
+                >
+                  fulfilled
+                </button>
               </div>
               <hr />
-              <h3>Ordered Materials:  </h3>
+              <h3>Ordered Materials: </h3>
               <table className="table-striped">
                 <thead className="header">
                   <tr>

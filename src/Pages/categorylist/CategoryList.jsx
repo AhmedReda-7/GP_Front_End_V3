@@ -16,18 +16,14 @@ export default function CategoryList() {
 useEffect(() => {
   getAllcategory();
 }, []);
- 
-
 
 
   const columnscategory = [
-   
     {
       field: "action",
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
-       
         return (
           
           <div>

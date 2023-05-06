@@ -12,19 +12,14 @@ import axios from "axios";
 import FmsCategoryContext from "../../context/FmsCategoryContext";
 
 export default function FmsViewCategory() {
-  const { detailData, getCategoryById, handleDelete } =
+  const { detailData, getCategoryById, handleDelete, category1 } =
     useContext(FmsCategoryContext);
 
   const { catId } = useParams();
+
   useEffect(() => {
     getCategoryById(catId);
   }, [catId]);
-  const [data, setData] = useState({
-    catId: catId,
-    catName: detailData.catName,
-    catDescription: detailData.catDescription,
-  });
-
   const columnsaccount = [
     {
       field: "action",
@@ -71,8 +66,8 @@ export default function FmsViewCategory() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     sendData();
+    window.location.reload();
   };
 
   async function getAllCategoriesAccount() {
@@ -82,11 +77,30 @@ export default function FmsViewCategory() {
 
     setAccountCategories(categoryObject.data);
   }
-  console.log(AccountCategories);
 
   useEffect(() => {
     getAllCategoriesAccount();
+    getAllAccounts();
   }, []);
+
+  const [Accounts, setAccounts] = useState([]);
+
+  async function getAllAccounts() {
+    const response = await axios.get(
+      `https://localhost:44393/api/FmsGetAllAccounts`
+    );
+    setAccounts(response.data);
+  }
+
+
+  const renderAccountOptions = () => {
+    return Accounts.map((account) => (
+      <option key={account.accId} value={account.accId}>
+        {account.accName}
+      </option>
+    ));
+  };
+
 
   return (
     <div className="list">
@@ -95,15 +109,15 @@ export default function FmsViewCategory() {
         <Navbar />
         <div className="datatable1">
           <div className="datatableTitle">
-            Category Name: {data.catName}
+            Category Name: {detailData.catName}
             <br></br>
-            Category Id: {data.catId}
+            Category Id: {catId}
           </div>
 
           <DataGrid
             className="datagrid"
             getRowId={(row) => row.catId}
-            rows={[data]}
+            rows={[detailData]}
             columns={fmsCategoryCoulm.concat(columnsaccount)}
             pageSize={1}
             rowsPerPageOptions={[1]}
@@ -116,14 +130,15 @@ export default function FmsViewCategory() {
           <h1 className="addProductTitle">New Account</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>
             <div className="addProductItem">
-              <label>Account Id</label>
-              <input
-                type="number"
+              <label>Accounts</label>
+              <select
                 name="accId"
                 value={category.accId}
                 onChange={handleInputChange}
-                placeholder=""
-              />
+              >
+                <option value="">Select an Account</option>
+                {renderAccountOptions()}
+              </select>
             </div>
 
             <button className="addProductButton">Add Account</button>
@@ -133,7 +148,9 @@ export default function FmsViewCategory() {
           <h2>this Category has {AccountCategories.length} Accounts :</h2>
           {AccountCategories.map((Account) => (
             <div className="AccountCategories">
-              <h3>Account Id: {Account.accId}</h3>
+              <h3>Account Id: {Account.accId} -</h3>
+              <br />
+              <h3>- Name: {category1.catAccounts}</h3>
               <br />
             </div>
           ))}

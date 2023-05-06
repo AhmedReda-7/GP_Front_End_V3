@@ -54,9 +54,14 @@
       }
 
 .AccountStatement{
+  display: flex;
   margin-left: 110px;
   margin-top: 30px;
 }
 .catdev{
   margin-left: 50px;
+}
+.AccountStatement h3 {
+  margin-left: 100px;
+  
 }

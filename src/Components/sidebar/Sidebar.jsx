@@ -31,6 +31,8 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import CategoryIcon from '@mui/icons-material/Category';
+import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
+import MultipleStopIcon from "@mui/icons-material/MultipleStop";
 import { DarkModeContext } from './../../context/darkModeContext';
 
 import {useContext} from "react";
@@ -65,14 +67,6 @@ function Sidebar() {
               <span>Employees</span>
             </Link>
           </li>
-          {
-            // <li>
-            //   <Link to="/distributer" style={{ textDecoration: "none" }}>
-            //   <PersonOutlineIcon className="icon" />
-            //   <span>Distributor</span>
-            //   </Link>
-            // </li>
-          }
           <li>
             <Link to="/supplier" style={{ textDecoration: "none" }}>
               <MovingIcon className="icon" />
@@ -86,6 +80,20 @@ function Sidebar() {
               <span>Supplier Orders</span>
             </Link>
           </li>
+
+          <li>
+            <Link to="/distributor" style={{ textDecoration: "none" }}>
+              <LibraryAddCheckIcon className="icon" />
+              <span>Distributors</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/distributororders" style={{ textDecoration: "none" }}>
+              <MultipleStopIcon className="icon" />
+              <span>Distribution Orders</span>
+            </Link>
+          </li>
+
           {
             //  <li>
             // <Link to="/customer" style={{ textDecoration: "none" }}>
@@ -110,7 +118,7 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/category" style={{ textDecoration: "none" }}>
+            <Link to="/fmscategory" style={{ textDecoration: "none" }}>
               <CategoryOutlinedIcon className="icon" />
               <span>Fms Category</span>
             </Link>

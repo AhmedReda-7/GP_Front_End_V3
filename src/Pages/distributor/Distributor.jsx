@@ -1,34 +1,38 @@
-import "./Journals.css";
+import "./Distributor.css";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { journalCoulm } from "../../dummyData";
+import { distributorCoulm } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
-import JournalContext from "../../context/JournalContext";
+import DistributorContext from "../../context/DistributorContext";
 
-export default function Journals() {
-  const { getAlljournal, data, handleDelete } = useContext(JournalContext);
+export default function Distributor() {
+  const { getAlldistributor, data, handleDelete } = useContext(DistributorContext);
 
   useEffect(() => {
-    getAlljournal();
+    getAlldistributor();
   }, []);
 
-  const columnsjournal = [
+  const columnsdistributor = [
     {
       field: "action",
 
       headerName: "Action",
 
-      width: 130,
+      width: 210,
 
       renderCell: (params) => {
         return (
           <div>
-            <Link to={"/journals/" + params.row.jeid}>
+            <Link to={"/distributor/" + params.row.distributorId}>
               <button className="productListEdit">Edit</button> 
             </Link>
+            <DeleteOutlineIcon
+              className="productListDelete"
+              onClick={() => handleDelete(params.row.distributorId)}
+            />
           </div>
         );
       },
@@ -42,17 +46,17 @@ export default function Journals() {
         <Navbar />
         <div className="datatable">
           <div className="datatableTitle">
-            Journals
-            <Link to="/journals/newjournal" className="link">
-              Add New
+            Distributor
+            <Link to="/distributor/newdistributor" className="link">
+              Add New Distributor
             </Link>
           </div>
 
           <DataGrid
             className="datagrid"
-            getRowId={(row) => row.jeid}
+            getRowId={(row) => row.distributorId}
             rows={data}
-            columns={journalCoulm.concat(columnsjournal)}
+            columns={distributorCoulm.concat(columnsdistributor)}
             pageSize={9}
             rowsPerPageOptions={[9]}
             checkboxSelection

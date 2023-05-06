@@ -12,20 +12,13 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function ViewTemplate() {
-  const { detailData, getTemplateById, handleDelete } =
+  const { detailData, getTemplateById, handleDelete,template } =
     useContext(TemplateContext);
-
   const { tempId } = useParams();
-  const [data, setData] = useState({
-    tempId: tempId,
-    tempName: detailData.tempName,
-    tempDate: detailData.tempDate,
-  });
-
   useEffect(() => {
     getTemplateById(tempId);
   }, [tempId]);
-
+  
   const columnsaccount = [
     {
       field: "action",
@@ -47,9 +40,6 @@ export default function ViewTemplate() {
     },
   ];
 
-
-
-
   const [Template, setTemplate] = useState({
     accId: "",
     tempId: tempId,
@@ -66,7 +56,7 @@ export default function ViewTemplate() {
 
   async function sendData() {
     const TemplateData = { ...Template };
-    
+
     const res = await axios.post(
       `https://localhost:44393/api/FmsAddTemplateAccount?tempID=${tempId}&accID=${Template.accId}`,
       TemplateData
@@ -75,8 +65,8 @@ export default function ViewTemplate() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     sendData();
+    window.location.reload();
   };
 
   async function getAllAccountCategories() {
@@ -89,8 +79,8 @@ export default function ViewTemplate() {
 
   useEffect(() => {
     getAllAccountCategories();
+    getAllTemplates();
   }, []);
-
 
   async function addStatement() {
     const state = await axios.post(
@@ -98,6 +88,26 @@ export default function ViewTemplate() {
     );
   }
 
+  const [Templates, setTemplates] = useState([]);
+
+  async function getAllTemplates() {
+    const response = await axios.get(
+      `https://localhost:44393/api/FmsGetAllAccounts`
+    );
+    setTemplates(response.data);
+  }
+
+  const renderaccountOptions = () => {
+    return Templates.map((account) => (
+      <option key={account.accId} value={account.accId}>
+        {account.accName}
+      </option>
+    ));
+  };
+
+  const names = template.map((name) => {
+    return name.accName
+  });
 
   return (
     <div className="list">
@@ -105,20 +115,20 @@ export default function ViewTemplate() {
       <div className="listContainer">
         <Navbar />
         <div className="datatable1">
-        <div className="row">
-          <button onClick={addStatement}>Add New Statement</button>
+          <div className="row">
+            <button onClick={addStatement}>Add New Statement</button>
           </div>
           <br />
           <div className="datatableTitle">
-            Template Name: {data.tempName}
+            Template Name: {detailData.tempName}
             <br />
-            Template Id: {data.tempId}
+            Template Id: {tempId}
           </div>
 
           <DataGrid
             className="datagrid"
             getRowId={(row) => row.tempId}
-            rows={[data]}
+            rows={[detailData]}
             columns={templateCoulm.concat(columnsaccount)}
             pageSize={1}
             rowsPerPageOptions={[1]}
@@ -133,13 +143,14 @@ export default function ViewTemplate() {
           <form className="addProductForm" onSubmit={handleSubmit}>
             <div className="addProductItem">
               <label>Account Id</label>
-              <input
-                type="number"
+              <select
                 name="accId"
                 value={Template.accId}
                 onChange={handleInputChange}
-                placeholder=""
-              />
+              >
+                <option value="">Select an Account</option>
+                {renderaccountOptions()}
+              </select>
             </div>
 
             <button className="addProductButton">Add Account</button>
@@ -152,6 +163,7 @@ export default function ViewTemplate() {
           {AccountCategories.map((Template) => (
             <div className="AccountStatement">
               <h3>Account Id: {Template.accId}</h3>
+              <h3>Name: {names}</h3>
             </div>
           ))}
         </div>

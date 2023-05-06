@@ -12,20 +12,9 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function ViewAccount() {
-  const { detailData, getAccountById, handleDelete } =
-    useContext(AccountContext);
-
-  
-
   const { accId } = useParams();
-  const [data, setData] = useState({
-    accId: accId,
-    accBalance: detailData.accBalance,
-    accDebit: detailData.accDebit,
-    accCredit: detailData.accCredit,
-    accName: detailData.accName,
-    increaseMode: detailData.increaseMode,
-  });
+  const { detailData, getAccountById, handleDelete, account } =
+    useContext(AccountContext);
 
   useEffect(() => {
     getAccountById(accId);
@@ -52,10 +41,6 @@ export default function ViewAccount() {
     },
   ];
 
-
-
-
-
   const [category, setcategory] = useState({
     catId: "",
     accId: accId,
@@ -72,19 +57,18 @@ export default function ViewAccount() {
 
   async function sendData() {
     const categoryData = { ...category };
-    
 
     const res = await axios.post(
       `https://localhost:44393/api/FmsAddAccCat?accID=${accId}&catID=${categoryData.catId}`,
       categoryData
     );
-    console.log(res)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     sendData();
+    window.location.reload();
   };
 
   async function getAllAccountCategories() {
@@ -94,11 +78,31 @@ export default function ViewAccount() {
 
     setAccountCategories(accountObject.data);
   }
-  console.log(AccountCategories);
 
   useEffect(() => {
     getAllAccountCategories();
   }, []);
+
+  const [categories, setCategories] = useState([]);
+
+  async function getAllCategories() {
+    const response = await axios.get(
+      `https://localhost:44393/api/FmsGetAllCategories`
+    );
+    setCategories(response.data);
+  }
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
+  const renderCategoryOptions = () => {
+    return categories.map((category) => (
+      <option key={category.catId} value={category.catId}>
+        {category.catName}
+      </option>
+    ));
+  };
 
   return (
     <div className="list">
@@ -107,47 +111,52 @@ export default function ViewAccount() {
         <Navbar />
         <div className="datatable1">
           <div className="datatableTitle">
-            Account Name: {data.accName}
+            Account Name: {detailData.accName}
             <br></br>
-            Account Id: {data.accId}
+            Account Id: {accId}
           </div>
 
           <DataGrid
             className="datagrid"
             getRowId={(row) => row.accId}
-            rows={[data]}
+            rows={[detailData]}
             columns={accountCoulm.concat(columnsaccount)}
             pageSize={1}
             rowsPerPageOptions={[1]}
             disableSelectionOnClick
           />
         </div>
+
         <br></br>
         <br></br>
         <div className="container">
           <h1 className="addProductTitle">New category</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>
             <div className="addProductItem">
-              <label>Category Id</label>
-              <input
-                type="number"
+              <label>Categorys</label>
+              <select
                 name="catId"
                 value={category.catId}
                 onChange={handleInputChange}
-                placeholder=""
-              />
+              >
+                <option value="">Select a category</option>
+                {renderCategoryOptions()}
+              </select>
             </div>
 
             <button className="addProductButton">Add Category</button>
           </form>
         </div>
         <div className="catdev">
-          <h2>this Account is Listed in {AccountCategories.length} Categories : </h2>
+          <h2>
+            this Account is Listed in {AccountCategories.length} Categories :
+          </h2>
           {AccountCategories.map((category) => (
             <div className="AccountCategories">
-              <h3>Category Id: {category.catId}</h3>
+              <h3> Category Id: {category.catId} -</h3>
               <br />
-              
+              <h3>- Name: {account.accCategories} </h3>
+              <br />
             </div>
           ))}
         </div>

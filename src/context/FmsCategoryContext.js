@@ -6,7 +6,12 @@ const FmsCategoryContext = createContext();
 
 export function FmsCategoryContextProvider({ children }) {
   const [data, setData] = useState([]);
-  const [detailData, setDetailData] = useState([]);
+  const [category1, setcategory] = useState([]);
+  const [detailData, setDetailData] = useState({
+    catId: "",
+    catDescription: category1.catDescription,
+    catName: category1.catName,
+  });
 
   async function getAllcategory() {
     const allcategory = await axios.get(
@@ -22,6 +27,7 @@ export function FmsCategoryContextProvider({ children }) {
     );
 
     setDetailData(categoryObject.data);
+    setcategory(categoryObject.data);
   }
 
   async function deleteCategory(id) {
@@ -52,6 +58,7 @@ export function FmsCategoryContextProvider({ children }) {
   const valuetoshare = {
     data,
     detailData,
+    category1,
     getAllcategory,
     handleDelete,
     handleupdate,

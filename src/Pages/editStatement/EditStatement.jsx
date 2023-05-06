@@ -15,6 +15,7 @@ export default function EditStatement() {
     staName: "",
     staBalance: "",
     staDate: "",
+    accounts:[]
   });
 
   const handleSubmit = (e) => {

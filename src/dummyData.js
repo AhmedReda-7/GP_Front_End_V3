@@ -290,8 +290,6 @@ export const manufacturCoulm =[
 ];
 export const supporderCoulm =[
   { field: "id", headerName: "id", width: 80 },
-
- 
   {
     field: "supplierId",
     headerName: "supplierId",
@@ -427,7 +425,7 @@ export const journalCoulm = [
 ];
 
 export const fmsCategoryCoulm = [
-  { field: "catId", headerName: "Category id", width: 100 },
+  { field: "catId", headerName: "Category Id", width: 100 },
 
   {
     field: "catName",
@@ -489,5 +487,73 @@ export const templateCoulm = [
     headerName: "Template Date",
 
     width: 300,
+  },
+];
+export const distributorCoulm = [
+  { field: "distributorId", headerName: "Distributor id", width: 100 },
+  {
+    field: "distributorName",
+    headerName: "Distributor Name",
+    width: 200,
+  },
+  {
+    field: "phoneNumber",
+    headerName: "Phone Number",
+    width: 200,
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    width: 300,
+  },
+  
+  {
+    field: "address",
+    headerName: "Address",
+    width: 300,
+  },
+];
+
+export const distributionOrdersCoulm = [
+  { field: "id", headerName: "Order Id", width: 80 },
+  {
+    field: "distributorId",
+    headerName: "Distributor Id",
+    width: 100,
+  },
+  {
+    field: "distributorName",
+    headerName: "Distributor Name",
+    width: 150,
+  },
+  {
+    field: "totalQty",
+    headerName: "Total Qty",
+    width: 100,
+  },
+  {
+    field: "totalPrice",
+    headerName: "Total Price",
+    width: 130,
+  },
+  {
+    field: "orderStatus",
+    headerName: "Order Status",
+    width: 150,
+  },
+  {
+    field: "orderStatusId",
+    headerName: "Order StatusId",
+    width: 130,
+  },
+  {
+    field: "orderingDate",
+    headerName: "orderingDate",
+    width: 180,
+  },
+  {
+    field: "expectedArrivalDate",
+    headerName: "expectedArrivalDate",
+    width: 200,
   },
 ];

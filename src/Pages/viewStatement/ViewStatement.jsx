@@ -12,10 +12,8 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function ViewStatement() {
-  const { detailData, getStatementById, handleDelete } =
+  const { detailData, getStatementById, handleDelete, statement } =
     useContext(StatementContext);
-
-  
 
   const { staId } = useParams();
   const [data, setData] = useState({
@@ -60,30 +58,6 @@ export default function ViewStatement() {
   });
   const [AccountStatement, setAccountStatement] = useState([]);
 
-  const handleInputChange = (e) => {
-    const StatementData = { ...Statement };
-
-    StatementData[e.target.name] = e.target.value;
-
-    setStatement(StatementData);
-  };
-
-  async function sendData() {
-    const StatementData = { ...Statement };
-    
-
-    const res = await axios.post(
-      `https://localhost:44393/api/FmsAddStatementAccount?staID=${staId}&accName=${Statement.accName}`,
-      StatementData
-    );
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    sendData();
-  };
-
   async function getAllAccountStatement() {
     const accountObject = await axios.get(
       `https://localhost:44393/api/FmsGetStatementAccounts?staID=${staId}`
@@ -103,15 +77,15 @@ export default function ViewStatement() {
         <Navbar />
         <div className="datatable1">
           <div className="datatableTitle">
-            Statement Name: {data.staName}
+            Statement Name: {detailData.staName}
             <br></br>
-            Statement Id: {data.staId}
+            Statement Id: {staId}
           </div>
 
           <DataGrid
             className="datagrid"
             getRowId={(row) => row.staId}
-            rows={[data]}
+            rows={[detailData]}
             columns={statementCoulm.concat(columnsaccount)}
             pageSize={1}
             rowsPerPageOptions={[1]}
@@ -126,9 +100,9 @@ export default function ViewStatement() {
           {AccountStatement.map((Statement) => (
             <div className="AccountStatement">
               <h3>Account Name: {Statement.accName}</h3>
-              <br />
+              
               <h3>Account Balance: {Statement.accBalance}</h3>
-              <br />
+              
             </div>
           ))}
         </div>

@@ -1,21 +1,19 @@
-import "./SupplierordersList.scss";
+import "./DistributionOrders.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { supporderCoulm } from "../../dummyData";
+import { distributionOrdersCoulm } from "../../dummyData";
 import { Link } from "react-router-dom";
 import Sidebar from "../../Components/sidebar/Sidebar";
-import Navbar from "./../../Components/navbar/Navbar";
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import SupplierorderContext from "../../context/SupplierorderContext";
+import Navbar from "../../Components/navbar/Navbar";
+import { useEffect, useContext } from "react";
+import DistributionOrdersContext from "../../context/DistributionOrdersContext";
 
-export default function SupplierordersList() {
-  const { getAllSupplierorder, data } = useContext(SupplierorderContext);
-  //console.log(data);
+export default function DistributionOrders() {
+  const { getAllDistributionOrders, data } = useContext(DistributionOrdersContext);
   useEffect(() => {
-    getAllSupplierorder();
+    getAllDistributionOrders();
   }, []);
 
-  const columnordersupp = [
+  const columnDistributionOrders = [
     {
       field: "action",
       headerName: "Action",
@@ -24,10 +22,10 @@ export default function SupplierordersList() {
         return (
           <div className="cellAction">
             <Link
-              to={"/supplierorders/view/" + params.row.id}
+              to={"/distributororders/view/" + params.row.id}
               style={{ textDecoration: "none" }}
             >
-              <div className="viewButton">VIEW and Change Status</div>
+              <div className="viewButton">View and Update Status</div>
             </Link>
           </div>
         );
@@ -42,8 +40,11 @@ export default function SupplierordersList() {
         <Navbar />
         <div className="datatable">
           <div className="datatableTitle">
-            Order RawMaterial From Supplier
-            <Link to="/supplierorders/newordersupply" className="link">
+            Distribution Orders
+            <Link
+              to="/distributororders/neworder"
+              className="link"
+            >
               Order
             </Link>
           </div>
@@ -52,7 +53,7 @@ export default function SupplierordersList() {
             className="datagrid"
             getRowId={(row) => row.id}
             rows={data}
-            columns={supporderCoulm.concat(columnordersupp)}
+            columns={distributionOrdersCoulm.concat(columnDistributionOrders)}
             pageSize={9}
             rowsPerPageOptions={[9]}
             checkboxSelection
