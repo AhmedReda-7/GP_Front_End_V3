@@ -9,7 +9,7 @@ import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutline
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
 import { useContext } from 'react';
 import { DarkModeContext } from './../../context/darkModeContext';
-function Navbar() {
+function Navbar({logOut}) {
 
   const { dispatch } = useContext(DarkModeContext);
 
@@ -20,6 +20,7 @@ function Navbar() {
           <input type="text" placeholder="Search..." />
           <SearchOutlinedIcon />
         </div>
+     <h4 className='lead'> Welcome You'r {localStorage.getItem("name")}.</h4>
         <div className="items">
           <div className="item">
             <LanguageOutlinedIcon className="icon" />
@@ -51,6 +52,9 @@ function Navbar() {
               className="avatar"
             />
           </div>
+          <button onClick={()=>{logOut()}}  type='submit' className='logout'>
+          LOGOUT  
+            </button>
         </div>
       </div>
     </div>

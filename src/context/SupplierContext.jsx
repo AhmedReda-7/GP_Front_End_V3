@@ -12,8 +12,19 @@ export function SupplierContextProvider({children})
 
     async function getAllsupplier()
     {
-     const allsupplier = await axios.get(`https://localhost:44393/api/GetAllSuppliers`);
+       // const token = localStorage.getItem('token');
+       const allsupplier = await axios.get(`https://localhost:44393/api/GetAllSuppliers`);
+
+
+
+//      const allsupplier = await axios.get(`https://localhost:44393/api/GetAllSuppliers`);
      setData(allsupplier.data);
+    }
+    async function getAllsupply()
+    {
+     const allsupplier = await axios.get(`https://localhost:44393/api/GetAllSuppliers`);
+//      console.log( allsupplier.data);
+     return allsupplier.data;
     }
     async function getSupllierById(id)
     {
@@ -41,28 +52,47 @@ export function SupplierContextProvider({children})
               showCancelButton: true,
               confirmButtonText: 'Yes, delete it!',
               cancelButtonText: 'No, cancel!',
-          }).then(result => {
+       }).then(result => {
               if (result.value) {
-                  const [employee] = data.filter(employee => employee.id === id);
-  
-                  Swal.fire({
-                      icon: 'success',
-                      title: 'Deleted!',
-                      text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
-                      showConfirmButton: false,
-                      timer: 2000,
-                  });
-              }
-       });
-        deletesupplier(id);
-         getAllsupplier();
+
+              Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            showConfirmButton: false,
+                            timer: 2000,
+                     });
+              deletesupplier(id);
+                            
+ 
+       setData(getAllsupply())
+       setData(data.filter(employee => employee.supplierId !== id));
        
-          
+              }
+
+              else if (
+                     /* Read more about handling dismissals below */
+                     result.dismiss === Swal.DismissReason.cancel
+                   ) {
+                     Swal.fire(
+                       'Cancelled',
+                       'Your imaginary file is safe :)',
+                       'error'
+                     )
+                   }
+                   
+              //      getAllsupplier();
+
+       });
+      
+  
+       
+       
 
       };
       async function updateSupplier(id,updatedData)
       {
              const updateSupplier = await axios.put(`https://localhost:44393/api/UpdateSupplier/${id}`,updatedData);
+             
             
       }
          const handleupdate = (id,updatedData) => {

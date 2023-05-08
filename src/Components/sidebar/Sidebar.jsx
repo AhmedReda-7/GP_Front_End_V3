@@ -37,7 +37,7 @@ function Sidebar() {
     <div className="sidebar">
       <div className="top">
       
-      <Link to="/" style={{ textDecoration: "none" }}>
+      <Link to="/home" style={{ textDecoration: "none" }}>
       <span className="logo">ERP System</span>
     </Link>
       </div>
@@ -46,11 +46,12 @@ function Sidebar() {
         <ul>
           <p className="title">Dashboard</p>
           <li>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/home" style={{ textDecoration: "none" }}>
             <LineStyleIcon className="icon"/>
             <span>Home</span>
             </Link>
           </li>
+       
     
           <p className="title">LISTS</p>
 

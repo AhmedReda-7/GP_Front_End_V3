@@ -1,191 +1,158 @@
-import "./login.scss";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment , useState} from 'react'
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+import Joi from 'joi';
+import "./login.css"
+import { LineStyleIcon } from '@mui/icons-material/LineStyle';
+import { Link } from 'react-router-dom';
+export default function Login({saveUserData}) {
+  
 
-const Login = () => {
-  const [formData, setFormData] = useState({
-    Email: "",
-    Password: "",
-  });
-  const [change, setChange] = useState(false);
+  let navigate = useNavigate();
+  
+const [errorList, seterrorList] = useState([]);
+const [error, setError] = useState('');
+const [isLoading, setisLoading] = useState(false);
+ const [user, setUser] = useState({
 
-  function handleChange(event) {
-    setFormData((prevState) => {
-      return {
-        ...prevState,
-        [event.target.id]: event.target.value,
-      };
-    });
+    
+        email: "",
+        password: ""
+      
+ });
+ function getUserData(e)
+ {
+  let myUser ={...user};
+  // console.log("hello");
+    // myUser.first_name = e.target.value;
+    myUser[e.target.name] = e.target.value;
+    setUser (myUser);
+    // console.log(myUser);
+ }
+async function sendLoginDataToApi()
+ {
+  let {data} =  await axios.post(`https://localhost:44393/api/Login`,user);
+  if(data.token)
+  {
+
+      setisLoading(false);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('email', data.email);
+      localStorage.setItem('name', data.name);
+      //
+      saveUserData();
+      navigate('/home');
+
   }
+  else{
+    setisLoading(false);
+    setError(data.message);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log(formData);
   }
+ 
+ }
 
-  const [RegisterData, setRegisterData] = useState({
-    firstName: "",
-    lastName: "",
-    EmailR: "",
-    passwordR: "",
-    reEnterPassword: "",
-  });
+ function submitLoginForm(e)
+ {
+      setisLoading(true);
+      e.preventDefault();
+      // sendLoginDataToApi();
+     let validation =  validateLoginForm();
+     if(validation.error)
+     {
+          setisLoading(false);
+          seterrorList(validation.error.details);
+          console.log(validation.error.details)
+        ///
+          
 
-  function handleRegChange(event) {
-    setRegisterData({
-      ...RegisterData,
-      [event.target.id]: event.target.value,
-    });
-  }
 
-  function handleSubmitR(event) {
-    event.preventDefault();
+     }
+     else{
+      sendLoginDataToApi();
+     }
+ }
 
-    if (
-      RegisterData.passwordR === RegisterData.reEnterPassword &&
-      RegisterData.passwordR.length >= 8
-    ) {
-      console.log("valid password");
-    } else if (RegisterData.passwordR !== RegisterData.reEnterPassword) {
-      console.log("password dont match");
-    } else if (RegisterData.passwordR.length < 8) {
-      console.log("password isnt strong enough");
-    } else {
-      console.log("password isnot valid");
-    }
+ function validateLoginForm()
+ {
+   let scheme =   Joi.object({
+        
+        email:Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+        password:Joi.string()
 
-    console.log("Form Data:", RegisterData);
-  }
+      
+      });
+    return scheme.validate(user,{abortEarly:false});
+ }
+  return<Fragment>
+  
+  {
+  //   errorList.map((err,index)=> {
+  //   if(err.context.label ==='password')
+  //   {
+  //      return <div key={index} className="alert alert-danger my-2">password invalied 😒..</div>
+  //   }
+  //   else{
+  //     return <div key={index} className="alert alert-danger my-2">{err.message}</div>
+  //   }
+  // }
 
-  function alter() {
-    setChange((prevState) => !prevState);
-    setFormData({
-      Email: "",
-      Password: "",
-    });
-    setRegisterData({
-      firstName: "",
-      lastName: "",
-      EmailR: "",
-      passwordR: "",
-      reEnterPassword: "",
-    });
-  }
+  //    )
+}
 
-  return (
-    <div className="datatable">
-      <div className="main">
-        {change ? (
-          <div>
-            <h1>Sign in</h1>
-            <form onSubmit={handleSubmit}>
-              <div className="input">
-                <input
-                  required
-                  type="email"
-                  placeholder="Email"
-                  id="Email"
-                  value={formData.Email}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="input">
-                <input
-                  required
-                  type="password"
-                  placeholder="Password"
-                  id="Password"
-                  value={formData.Password}
-                  onChange={handleChange}
-                />
-              </div>
+  {
+//     error.length >0 ? <div className="alert alert-danger my-2">{error}</div>
+// :''
+}
 
-              <button type="submit">
-                {" "}
-                <Link to="/" className="link-1">
-                  Login
-                </Link>
-              </button>
-            </form>
-            <div className="alt">
-              <p>new account?</p>
-              <button onClick={alter}>Sign Up</button>
+{
+//   <form onSubmit={submitLoginForm}>
+    
+//     <label htmlFor="email">email :</label>
+//     <input  onChange={getUserData} type="email" className='form-control my-input-log my-2' name='email' />
+//     {errorList.filter((err)=> err.context.label === 'email')[0]?<div className="alert alert-danger my-2">
+//     <p>{errorList.filter((err)=> err.context.label === 'email')[0]?.message}</p>
+//  </div>:''}
+//     <label htmlFor="password">password :</label>
+//     <input  onChange={getUserData} type="password" className='form-control my-input-log my-2' name='password' />
+//     {errorList.filter((err)=> err.context.label === 'password')[0]?<div className="alert alert-danger my-2">
+//     <p>password invalied 😒.. must the initial letter be capital</p>
+//  </div>:''}
+//     <button  type='submit' className='btn btn-info'>
+//      {isLoading === true ?<i className='fas fa-spinner fa-spin'></i>:'Login'}
+//     </button>
+//   </form>
+}
+<div className='body'>
+<form onSubmit={submitLoginForm}>
+<div className="container">
+        <div className="card">
+            <p className="login">Log in</p>
+            <div className="inputBox">
+            <input  onChange={getUserData} type="email" name='email'  required="required"/>
+            <span className="user">Email</span>
+            {errorList.filter((err)=> err.context.label === 'email')[0]?<div className="alert alert-danger my-2">
+    <p>{errorList.filter((err)=> err.context.label === 'email')[0]?.message}</p>
+  </div>:''}
             </div>
-          </div>
-        ) : (
-          <>
-            <div className="main">
-              <div className="head">
-                <h1>Sign Up</h1>
-              </div>
-              <form onSubmit={handleSubmitR}>
-                <div className="input">
-                  <input
-                    required
-                    placeholder="FirstName"
-                    type="text"
-                    id="firstName"
-                    value={RegisterData.firstName}
-                    onChange={handleRegChange}
-                  />
-                </div>
-                <div className="input">
-                  <input
-                    required
-                    placeholder="LastName"
-                    type="text"
-                    id="lastName"
-                    value={RegisterData.lastName}
-                    onChange={handleRegChange}
-                  />
-                </div>
-                <div className="input">
-                  <input
-                    required
-                    placeholder="Email"
-                    type="email"
-                    id="EmailR"
-                    value={RegisterData.EmailR}
-                    onChange={handleRegChange}
-                  />
-                </div>
-                <div className="input">
-                  <input
-                    required
-                    placeholder="Password"
-                    type="password"
-                    id="passwordR"
-                    value={RegisterData.passwordR}
-                    onChange={handleRegChange}
-                  />
-                </div>
-                <div className="input">
-                  <input
-                    required
-                    placeholder="re-enter Password"
-                    type="password"
-                    id="reEnterPassword"
-                    value={RegisterData.reEnterPassword}
-                    onChange={handleRegChange}
-                  />
-                </div>
 
-                <button type="submit">
-                  <Link to="/" className="link-2">
-                    Submit
-                  </Link>
-                </button>
-              </form>
+            <div className="inputBox">
+             <input  onChange={getUserData} type="password"  name='password'  required="required" />
+            <span>Password</span>
+            {errorList.filter((err)=> err.context.label === 'password')[0]?<div className="alert alert-danger my-2">
+              <p>password invalied 😒..</p>
+            </div>:''}
             </div>
-            <div className="alt alternative">
-              <p>Have an account?</p>
-              <button onClick={alter}>Sign in</button>
-            </div>
-          </>
-        )}
-      </div>
+
+            <button  type='submit' className='enter'>
+              {isLoading === true ?<i className='fas fa-spinner fa-spin'></i>:'Login'}
+             </button>
+        </div>
     </div>
-  );
-};
+</form>
 
-export default Login;
+</div>
+  </Fragment>
+}
+
+

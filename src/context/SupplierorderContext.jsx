@@ -9,7 +9,10 @@ export function SupplierorderContextProvider({children})
     const [data, setData] = useState([]);
     async function getAllSupplierorder()
     {
-     const allSupplierorder = await axios.get(`https://localhost:44393/api/GetAllSupplierOrders`);
+        // const token = localStorage.getItem('token');
+        const allSupplierorder = await axios.get(`https://localhost:44393/api/GetAllSupplierOrders`);
+
+    //  const allSupplierorder = await axios.get(`https://localhost:44393/api/GetAllSupplierOrders`);
      setData(allSupplierorder.data);
     }
     async function GetSupplierOrderById(id)
