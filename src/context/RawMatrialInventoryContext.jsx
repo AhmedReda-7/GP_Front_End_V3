@@ -13,6 +13,11 @@ export function RawMatrialInventoryContextProvider({children})
      const allRawMatrialInventory = await axios.get(`https://localhost:44393/api/GetAllRawMaterialsInventory`);
      setData(allRawMatrialInventory.data);
     }
+    async function getAllRawMatrialInventorydel()
+    {
+     const allRawMatrialInventory = await axios.get(`https://localhost:44393/api/GetAllRawMaterialsInventory`);
+     return allRawMatrialInventory.data;
+    }
     async function getRawMatrialInventoryById(id)
     {
            const rawmatrialinventoryObject = await axios.get(`https://localhost:44393/api/GetRawMaterialInventoryById/${id}`);
@@ -37,25 +42,28 @@ export function RawMatrialInventoryContextProvider({children})
               cancelButtonText: 'No, cancel!',
           }).then(result => {
               if (result.value) {
-                  const [employee] = data.filter(employee => employee.id === id);
   
                   Swal.fire({
                       icon: 'success',
                       title: 'Deleted!',
-                      text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
                       showConfirmButton: false,
                       timer: 2000,
                   });
 
 
 
+                  deleteRawMatrialInventory(id);
+                  setData(getAllRawMatrialInventorydel())
+       setData(data.filter(employee => employee.materialId !== id));
+       
+                  
+
 
 
   
 }
 });
-       deleteRawMatrialInventory(id);
-getAllRawMatrialInventory();
+// getAllRawMatrialInventory();
        
         
       };

@@ -44,20 +44,27 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="top">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">ERP System</span>
-        </Link>
+
+      
+      <Link to="/home" style={{ textDecoration: "none" }}>
+      <span className="logo">ERP System</span>
+    </Link>
+
+ 
       </div>
       <hr />
       <div className="center">
         <ul>
           <p className="title">Dashboard</p>
           <li>
-            <Link to="/" style={{ textDecoration: "none" }}>
-              <LineStyleIcon className="icon" />
-              <span>Home</span>
+          
+          <Link to="/home" style={{ textDecoration: "none" }}>
+            <LineStyleIcon className="icon"/>
+            <span>Home</span>
             </Link>
           </li>
+       
+    
 
           <p className="title">LISTS</p>
 

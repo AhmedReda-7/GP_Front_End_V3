@@ -13,6 +13,11 @@ export function AllproductContextProvider({children})
      const allproduct = await axios.get(`https://localhost:44393/api/GetAllProducts`);
      setData(allproduct.data);
     }
+    async function getAllproductdel()
+    {
+     const allproduct = await axios.get(`https://localhost:44393/api/GetAllProducts`);
+     return allproduct.data;
+    }
     async function getProductById(id)
     {
            const productObject = await axios.get(`https://localhost:44393/api/GetProductById/${id}`);
@@ -36,19 +41,30 @@ export function AllproductContextProvider({children})
               cancelButtonText: 'No, cancel!',
           }).then(result => {
               if (result.value) {
-                  const [employee] = data.filter(employee => employee.id === id);
   
                   Swal.fire({
                       icon: 'success',
                       title: 'Deleted!',
-                      text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
                       showConfirmButton: false,
                       timer: 2000,
                   });
+                  deleteproduct(id);
+                  setData(getAllproductdel())
+       setData(data.filter(employee => employee.productId !== id));
+
               }
+              else if (
+                     /* Read more about handling dismissals below */
+                     result.dismiss === Swal.DismissReason.cancel
+                   ) {
+                     Swal.fire(
+                       'Cancelled',
+                       'Your imaginary file is safe :)',
+                       'error'
+                     )
+                   }
        });
-       deleteproduct(id);
-         getAllproduct();
+       //   getAllproduct();
        
         
       };

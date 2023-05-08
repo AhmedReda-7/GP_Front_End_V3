@@ -8,14 +8,14 @@ import "./home.scss";
 import Feature from './../../Components/feature/Feature';
 import Charts from './../../Components/Chart/Charts';
 import Table  from './../../Components/table/Table';
-const Home = () => {
+const Home = ({logOut}) => {
   return (
     <div className='home'>
     
     <Sidebar/>
     <div className="homeContainer">
     
-    <Navbar/>
+    <Navbar logOut={logOut}/>
     <div className='widgets'>
           <Widget type="user" />
           <Widget type="order" />

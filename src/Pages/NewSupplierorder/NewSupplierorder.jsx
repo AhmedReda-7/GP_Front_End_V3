@@ -97,8 +97,9 @@ function NewSupplierorder({ inputs, title }) {
     console.log(e.target.value);
     console.log("====================================");
     const supplier = await getSuplliermatrialById(e.target.value);
-    localStorage.setItem("selectedId", e.target.value);
-    console.log(supplier.data);
+    localStorage.setItem("selectedId",e.target.value);
+    console.log(supplier.data)
+
     setSupplyMatraial(supplier.data);
     setSupporder(supporderData);
   }
@@ -185,7 +186,11 @@ function NewSupplierorder({ inputs, title }) {
           <div className="right">
             <form onSubmit={handleSubmit}>
               <div className="" style={{ display: "flex", gap: "20px" }}>
-                <label htmlFor="supplierId">choose Supplier</label>
+                <label htmlFor="supplierId">
+                choose Supplier
+                </label>
+
+        
                 <select
                   name="supplierId"
                   id="supplierId"

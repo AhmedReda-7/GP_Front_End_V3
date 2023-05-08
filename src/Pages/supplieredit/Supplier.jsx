@@ -30,6 +30,8 @@ export default function Supplier() {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleupdate(supplierId, supdata);
+    // console.log("suppdata",supdata)
+
     Swal.fire({
       icon: 'success',
       title: 'Updated!',
@@ -58,9 +60,7 @@ export default function Supplier() {
     console.log(typeof abc);
 
     const deleteMatrial = await axios.delete(
-      `https://localhost:44393/api/DeleteSupplingMaterialToSupplier_V3?supplierId=${Number(
-        supplierId
-      )}&supplyingMaterialId=${matrial.materialId}`
+      `https://localhost:44393/api/DeleteSupplingMaterialToSupplier_V3?supplierId=${supplierId}&supplyingMaterialId=${matrial.materialId}`
     );
     getSupplier();
     console.log(deleteMatrial);

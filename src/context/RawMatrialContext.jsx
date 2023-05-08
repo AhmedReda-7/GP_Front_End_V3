@@ -12,6 +12,12 @@ export function RawMatrialContextProvider({ children }) {
     );
     setData(allRawMatrial.data);
   }
+  async function getAllRawMatrialdel() {
+    const allRawMatrial = await axios.get(
+      `https://localhost:44393/api/GetAllRawMaterials`
+    );
+    return allRawMatrial.data ;
+  }
   async function getRawmatrialById(id) {
     const rawmatrialObject = await axios.get(
       `https://localhost:44393/api/GetRawMaterialById/${id}`
@@ -33,19 +39,29 @@ export function RawMatrialContextProvider({ children }) {
       cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.value) {
-        const [employee] = data.filter((employee) => employee.id === id);
 
         Swal.fire({
           icon: "success",
           title: "Deleted!",
-          text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
           showConfirmButton: false,
           timer: 2000,
         });
+        deleteRawMatrial(id);
+        setData(getAllRawMatrialdel())
+       setData(data.filter(employee => employee.materialId !== id));
        
       }
-      deleteRawMatrial(id);
-      getAllRawMatrial();
+      else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+      // getAllRawMatrial();
     });
   };
   async function updateRawmatrial(id, updatedData) {

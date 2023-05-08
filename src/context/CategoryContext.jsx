@@ -13,6 +13,11 @@ export function CategoryContextProvider({children})
      const allcategory = await axios.get(`https://localhost:44393/api/GetAllCategories`);
      setData(allcategory.data);
     }
+    async function getAllcategorydel()
+    {
+     const allcategory = await axios.get(`https://localhost:44393/api/GetAllCategories`);
+     return allcategory.data;
+    }
  async function getCategoryById(id)
  {
         const categoryObject = await axios.get(`https://localhost:44393/api/GetCategoryById/${id}`);
@@ -35,25 +40,36 @@ export function CategoryContextProvider({children})
               cancelButtonText: 'No, cancel!',
           }).then(result => {
               if (result.value) {
-                  const [employee] = data.filter(employee => employee.id === id);
   
                   Swal.fire({
                       icon: 'success',
                       title: 'Deleted!',
-                      text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
                       showConfirmButton: false,
                       timer: 2000,
                   });
 
 
 
+                  deleteCategory(id);
+                  setData(getAllcategorydel())
+       setData(data.filter(employee => employee.categoryId !== id));
+       
 
 
   
 }
+else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    Swal.fire(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    )
+  }
 });
-deleteCategory(id);
-getAllcategory();  
+// getAllcategory();  
       };
  async function updateCategory(id,updatedData)
  {
