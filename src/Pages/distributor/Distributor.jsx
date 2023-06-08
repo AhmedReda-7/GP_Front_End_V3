@@ -8,7 +8,7 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import DistributorContext from "../../context/DistributorContext";
 
-export default function Distributor() {
+export default function Distributor({logOut}) {
   const { getAlldistributor, data, handleDelete } = useContext(DistributorContext);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function Distributor() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="datatable">
           <div className="datatableTitle">
             Distributor

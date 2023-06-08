@@ -7,7 +7,7 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import AccountContext from "../../context/AccountContext";
 
-export default function Accounts() {
+export default function Accounts({logOut}) {
   const { getAllaccount, data} = useContext(AccountContext);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Accounts() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut}/>
         <div className="datatable">
           <div className="datatableTitle">
             Accounts

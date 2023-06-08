@@ -4,7 +4,7 @@ import Navbar from "../../Components/navbar/Navbar";
 import axios from "axios";
 import { useState } from "react";
 
-function FmsNewCategory() {
+function FmsNewCategory({logOut}) {
   const [category, setcategory] = useState({
     catName: "",
     catDescription: "",
@@ -37,7 +37,7 @@ function FmsNewCategory() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">New category</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

@@ -5,7 +5,7 @@ import Navbar from "../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
 import FmsCategoryContext from "../../context/FmsCategoryContext";
 
-export default function EditCategory() {
+export default function EditCategory({logOut}) {
   const { catId } = useParams();
 
   const { handleupdate, getCategoryById } = useContext(FmsCategoryContext);
@@ -43,7 +43,7 @@ export default function EditCategory() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">Edit Category</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

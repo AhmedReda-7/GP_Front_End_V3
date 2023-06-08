@@ -4,6 +4,10 @@
   display: flex;
 }
 
+.home .chart {
+  margin-top: 50px;
+}
+
 .home .homeContainer {
   -webkit-box-flex: 6;
       -ms-flex: 6;

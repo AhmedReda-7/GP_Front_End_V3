@@ -2,9 +2,15 @@ import React from "react";
 import "./sidebar.scss";
 import pic from "./logo.jpg";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
+import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
+import PriceChangeIcon from "@mui/icons-material/PriceChange";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
+import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
+import MultipleStopIcon from "@mui/icons-material/MultipleStop";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
@@ -20,6 +26,7 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import GroupsIcon from '@mui/icons-material/Groups';
 import AutoModeIcon from '@mui/icons-material/AutoMode';
 import MovingIcon from '@mui/icons-material/Moving';
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import AddTaskIcon from '@mui/icons-material/AddTask';import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
@@ -136,6 +143,18 @@ function Sidebar() {
           </li>
 
      
+          <li>
+            <Link to="/distributor" style={{ textDecoration: "none" }}>
+              <LibraryAddCheckIcon className="icon" />
+              <span>Distributors</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/distributororders" style={{ textDecoration: "none" }}>
+              <MultipleStopIcon className="icon" />
+              <span>Distribution Orders</span>
+            </Link>
+          </li>
           <p className="title">INVENTORY</p>
 
           <li>
@@ -152,106 +171,41 @@ function Sidebar() {
             <span>RawMaterialInventory</span>
             </Link>
           </li>
-          <p>............................</p>
-
-         
-          <li>
-          <Link to="/report" style={{ textDecoration: "none" }}>
-
-          <AssessmentIcon className="icon" />
-          
-            <span>Reports</span>
-            </Link>
-          </li>
-       
-         
-         
+          <p className="title">FMS</p>
          
 
-          
-        
+      
           <li>
-          <Link to="/delivery" style={{ textDecoration: "none" }}>
+          <Link to="/journals" style={{ textDecoration: "none" }}>
+            <MonitorHeartIcon className="icon" />
+            <span>Journals</span>
+          </Link>
+        </li>
 
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
-            </Link>
-          </li>
-          <li>
-          <Link to="/financial" style={{ textDecoration: "none" }}>
-
-            <AttachMoneyIcon className="icon" />
-            <span>Financial</span>
-            </Link>
-          </li>
-       
-         
-          <p className="title">Sales</p>
-          <li>
-          <Link to="/overview" style={{ textDecoration: "none" }}>
-            <PointOfSaleIcon className="icon"/>
-            <span>Overview</span>
-            </Link>
-          </li>
-
-          <li>
-          <Link to="/daily" style={{ textDecoration: "none" }}>
-            <TodayOutlinedIcon className="icon"/>
-            <span>Daily</span>
-            </Link>
-          </li>
-          <li>
-          <Link to="/monthly" style={{ textDecoration: "none" }}>
-            <CalendarMonthOutlinedIcon className="icon"/>
-            <span>Monthly</span>
-            </Link>
-          </li>
-          
-          <p className="title">Analysis</p>
-
-          <li>
-          <Link to="/analysis" style={{ textDecoration: "none" }}>
-
-            <TimelineIcon className="icon"/>
-            
-            <span>Analysis</span>
-            </Link>
-          </li>
-          <li>
-          <Link to="/report" style={{ textDecoration: "none" }}>
-
-          <AssessmentIcon className="icon" />
-          
-            <span>Reports</span>
-            </Link>
-          </li>
-          <p className="title">SERVICE</p>
-          <li>
-          <Link to="/system-health" style={{ textDecoration: "none" }}>
-
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />{" "}
-            <span>System Health</span>
-            </Link>
-          </li>
-          <li>
-          <Link to="/logs" style={{ textDecoration: "none" }}>
-
-            <PsychologyOutlinedIcon className="icon" /> <span>Logs</span>
-            </Link>
-          </li>
-          <li>
-          <Link to="/setting" style={{ textDecoration: "none" }}>
-
-            <SettingsApplicationsIcon className="icon" /> <span>Settings</span>
-            </Link>
-          </li>
-          <p className="title">ACCOUNT</p>
-          <li>
-          <Link to="/profile" style={{ textDecoration: "none" }}>
-
-            <AccountCircleOutlinedIcon className="icon" /> <span>Profile</span>
-            </Link>
-          </li>
+        <li>
+          <Link to="/accounts" style={{ textDecoration: "none" }}>
+            <AccountBalanceWalletIcon className="icon" />
+            <span>Accounts</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/fmscategory" style={{ textDecoration: "none" }}>
+            <CategoryOutlinedIcon className="icon" />
+            <span>Fms Category</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/statement" style={{ textDecoration: "none" }}>
+            <PriceChangeIcon className="icon" />
+            <span>Statements</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/template" style={{ textDecoration: "none" }}>
+            <AccountBalanceOutlinedIcon className="icon" />
+            <span>Templates</span>
+          </Link>
+        </li>
          
         </ul>
       </div>

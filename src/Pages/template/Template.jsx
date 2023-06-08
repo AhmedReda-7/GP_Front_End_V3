@@ -8,7 +8,7 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import TemplateContext from "../../context/TemplateContext";
 
-export default function Template() {
+export default function Template({logOut}) {
   const { getAlltemplate, data, handleDelete } = useContext(TemplateContext);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function Template() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="datatable">
           <div className="datatableTitle">
             Templates

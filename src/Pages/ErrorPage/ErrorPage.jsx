@@ -5,9 +5,9 @@ import "./error.css";
 export default function ErrorPage({ logOut }) {
   return (
     <Fragment>
-      <div className="row justify-content-center">
+      <div className="row card-container justify-content-center">
         <div className="col-md-12 col-sm-12">
-          <div className="card shadow-lg border-0 rounded-lg mt-5 mx-auto">
+          <div className="card-err shadow-lg border-0 rounded-lg mt-5 mx-auto">
             <h3 className="card-header display-1 text-muted text-center">
               Oops ㋡
             </h3>

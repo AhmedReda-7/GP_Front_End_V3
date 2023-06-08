@@ -58,6 +58,24 @@
   font-size: 12px;
 }
 
+.navbar .wrapper .spanwel {
+  color: #6439ff;
+}
+
+.navbar .wrapper .spicon {
+  color: #f1e040;
+}
+
+.navbar .wrapper .word {
+  font-family: 'Rock Salt', cursive;
+}
+
+.navbar .wrapper .logout {
+  background-color: #c51b1b;
+  color: white;
+  font-weight: bold;
+}
+
 .navbar .wrapper .items {
   display: -webkit-box;
   display: -ms-flexbox;

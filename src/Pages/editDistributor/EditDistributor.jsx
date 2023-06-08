@@ -5,7 +5,7 @@ import Navbar from "../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
 import DistributorContext from "../../context/DistributorContext";
 
-export default function EditDistributor() {
+export default function EditDistributor({logOut}) {
   const { distributorId } = useParams();
 
   const { handleupdate, getDistributorById } = useContext(DistributorContext);
@@ -44,7 +44,7 @@ export default function EditDistributor() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">Edit Distributor</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

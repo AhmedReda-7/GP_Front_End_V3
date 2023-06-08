@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-export default function ViewStatement() {
+export default function ViewStatement({logOut}) {
   const { detailData, getStatementById, handleDelete, statement } =
     useContext(StatementContext);
 
@@ -74,7 +74,7 @@ export default function ViewStatement() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="datatable1">
           <div className="datatableTitle">
             Statement Name: {detailData.staName}

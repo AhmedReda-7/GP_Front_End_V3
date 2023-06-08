@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import AccountContext from "../../context/AccountContext";
 
 
-export default function EditAccount() {
+export default function EditAccount({logOut}) {
   const { accId } = useParams();
 
   const { handleupdate, getAccountById } = useContext(AccountContext);
@@ -48,7 +48,7 @@ export default function EditAccount() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">Edit Account</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

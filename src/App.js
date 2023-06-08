@@ -76,7 +76,38 @@ import { toast } from "react-toastify";
 import { HrMangerContextProvider } from './context/HrMangerContext';
 import { EmployeeTrainingContextProvider } from './context/EmployeeTrainingContext';
 import { EmployeeTaskContextProvider } from './context/EmployeeTaskContext';
-
+import DistributionOrders from './Pages/distributionOrders/DistributionOrders';
+import ViewDistributionOrders from './Pages/viewDistributionOrders/ViewDistributionOrders';
+import NewDistributionOrders from './Pages/newDistributionOrders/NewDistributionOrders';
+import Distributor from './Pages/distributor/Distributor';
+import EditDistributor from './Pages/editDistributor/EditDistributor';
+import NewDistributor from './Pages/newDistributor/NewDistributor';
+import { DistributorContextProvider } from './context/DistributorContext';
+import { DistributionOrdersContextProvider } from './context/DistributionOrdersContext';
+import Journals from './Pages/journals/Journals';
+import EditJournal from './Pages/editJournals/EditJournal';
+import NewJournal from './Pages/newJournal/NewJournal';
+import Accounts from './Pages/accounts/Accounts';
+import ViewAccount from './Pages/viewAccount/ViewAccount';
+import EditAccount from './Pages/editAccount/EditAccount';
+import NewAccount from './Pages/newAccount/NewAccount';
+import { TemplateContextProvider } from './context/TemplateContext';
+import { StatementContextProvider } from './context/StatementContext';
+import { AccountContextProvider } from './context/AccountContext';
+import { FmsCategoryContextProvider } from './context/FmsCategoryContext';
+import { JournalContextProvider } from './context/JournalContext';
+import Statement from './Pages/statement/Statement';
+import ViewStatement from './Pages/viewStatement/ViewStatement';
+import EditStatement from './Pages/editStatement/EditStatement';
+import Template from './Pages/template/Template';
+import ViewTemplate from './Pages/ViewTemplate/ViewTemplate';
+import EditTemplate from './Pages/editTemplate/EditTemplate';
+import NewTemplate from './Pages/newTemplate/NewTemplate';
+import FmsCategory from './Pages/fmsCategory/FmsCategory';
+import FmsViewCategory from './Pages/fmsViewCategory/FmsViewCategory';
+import FmsNewCategory from './Pages/fmsNewCategory/FmsNewCategory';
+import FmsEditCategory from "./Pages/fmsEditCategory/FmsEditCategory";
+import NotvalidFms from './Pages/ProtectedRout/NotvalidFms';
 
 axios.interceptors.request.use(function (config) {
     
@@ -145,6 +176,13 @@ function App() {
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
+    <FmsCategoryContextProvider>
+                          <AccountContextProvider>
+                            <JournalContextProvider>
+                              <StatementContextProvider>
+                                <TemplateContextProvider>
+    <DistributorContextProvider>
+    <DistributionOrdersContextProvider>
     <EmployeeTaskContextProvider>
     <EmployeeTrainingContextProvider>
     <EmployeeContextProvider>
@@ -164,30 +202,29 @@ function App() {
           <Route path="/">
           <Route index element={<Login  saveUserData={saveUserData} />} />
             <Route path="home" element={<ProtectedRout userdata={userData}><Home logOut={logOut}/></ProtectedRout>} />
-            <Route path="overview" element={<ProtectedRout userdata={userData}><Overviewofsales  title="Overview of General Revenue and Profit" title2="Breakdown of Sales By Category" /></ProtectedRout>} />
             <Route path="error" element={<ProtectedRout userdata={userData}><ErrorPage logOut={logOut} /></ProtectedRout>} />
 
         
            <Route path="hrmanger">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><HrManagerList logOut={logOut}/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NotvalidFms userEmail={userEmail}><HrManagerList logOut={logOut}/></NotvalidFms></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path=":hrid" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><HrManager logOut={logOut} /></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path="view/:hrid" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><HrManagerView logOut={logOut}/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path="newhrmanger" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NewHrManager logOut={logOut}  inputs={HrManagerInputs} title="Add New HR-Manager"/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
           </Route>
            <Route path="employee">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><EmployeeList logOut={logOut}/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NotvalidFms userEmail={userEmail}><EmployeeList logOut={logOut}/></NotvalidFms></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path=":employeeid" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><Employee logOut={logOut} /></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path="view/:employeeid" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><EmployeeView logOut={logOut}/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path="newemployee" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NewEmployee logOut={logOut}  inputs={EmployeeInputs} title="Add New Employee"/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
           </Route>
            <Route path="employeetrain">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><EmployeeTrainList logOut={logOut}/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NotvalidFms userEmail={userEmail}><EmployeeTrainList logOut={logOut}/></NotvalidFms></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path=":trainnningId" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><EmployeeTrain logOut={logOut} /></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path="view/:trainnningId" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><EmployeeTrainView logOut={logOut}/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path="newemployeetrain" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NewEmployeeTrain logOut={logOut}  inputs={EmployeeTrainInputs} title="Add New Employee-Training"/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
           </Route>
            <Route path="employeetask">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><EmployeetaskList logOut={logOut}/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NotvalidFms userEmail={userEmail}><EmployeetaskList logOut={logOut}/></NotvalidFms></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path=":employeetaskid" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><Employeetask logOut={logOut} /></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path="view/:employeetaskid" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><EmployeetaskView logOut={logOut}/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
             <Route path="newemployeetask" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NewEmployeetask logOut={logOut}  inputs={EmployeetaskInputs} title="Add New Employee-Task"/></NotvalidInventory></NotvalidScm></ProtectedRout>} />
@@ -196,43 +233,43 @@ function App() {
           
 
             <Route path="products">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><NotvalidHr userEmail={userEmail}><ProductList logOut={logOut} /></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><NotvalidHr userEmail={userEmail}><NotvalidFms userEmail={userEmail}><ProductList logOut={logOut} /></NotvalidFms></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
             <Route path=":productId" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><Product logOut={logOut} /></NotvalidInventory></ProtectedRout>}/>
             <Route path="newproduct" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><NewProduct logOut={logOut} inputs={productInputs} title="Add New Product"/></NotvalidInventory></ProtectedRout>}/>
             </Route>
 
             <Route path="productsinventory">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidHr userEmail={userEmail}> <ProductinventoryList logOut={logOut} /></NotvalidHr> </NotvalidScm> </ProtectedRout>}/>
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidHr userEmail={userEmail}> <NotvalidFms userEmail={userEmail}><ProductinventoryList logOut={logOut} /></NotvalidFms></NotvalidHr> </NotvalidScm> </ProtectedRout>}/>
             <Route path=":productinventoryId" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}><Productinventory logOut={logOut} /></NotvalidScm> </ProtectedRout>}/>
             <Route path="newproductinventory" element={<ProtectedRout userdata={userData}>  <NotvalidScm userEmail={userEmail}> <NewProductinventory logOut={logOut}  inputs={productinventoryInputs} title="Add New Product To Inventory"/></NotvalidScm></ProtectedRout>}/>
             </Route>
 
             <Route path="category">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><CategoryList logOut={logOut} /></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><NotvalidFms userEmail={userEmail}><CategoryList logOut={logOut} /></NotvalidFms></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
             <Route path=":categoryId" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><Category logOut={logOut}/></NotvalidInventory></ProtectedRout>}/>
             <Route path="newcategory" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><NewCategory logOut={logOut} inputs={categoryInputs} title="Add New Category"/></NotvalidInventory></ProtectedRout>}/>
             </Route>
 
             <Route path="rawmatrial">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><RawMatrialList logOut={logOut} /></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><NotvalidFms userEmail={userEmail}><RawMatrialList logOut={logOut} /></NotvalidFms></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
             <Route path=":materialId" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><RawMatrial logOut={logOut}/></NotvalidInventory></ProtectedRout>}/>
             <Route path="newrawmatrial" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><Newmatrial logOut={logOut} inputs={rawmatrialInputs} title="Add New Raw Material"/></NotvalidInventory></ProtectedRout>}/>
             </Route>
 
             <Route path="rawmatrialinventory">
-            <Route index element={<ProtectedRout  userdata={userData}><NotvalidScm userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><RawMatrialInventoryList logOut={logOut}/></NotvalidHr></NotvalidScm></ProtectedRout>}/>
+            <Route index element={<ProtectedRout  userdata={userData}><NotvalidScm userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><NotvalidFms userEmail={userEmail}><RawMatrialInventoryList logOut={logOut}/></NotvalidFms></NotvalidHr></NotvalidScm></ProtectedRout>}/>
             <Route path=":rawmatrialinventoryId" element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}><RawMatrialinventory logOut={logOut}/></NotvalidScm> </ProtectedRout>}/>
             <Route path="newrawmatrialinventory" element={<ProtectedRout userdata={userData}><NotvalidScm userEmail={userEmail}><NewmatrialInventory logOut={logOut} inputs={rawmatrialinventoryInputs} title="Add New Raw Material Inventory"/></NotvalidScm></ProtectedRout>}/>
             </Route>
 
             <Route path="manufactur">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><ManufacturList logOut={logOut} /></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><NotvalidFms userEmail={userEmail}><ManufacturList logOut={logOut} /></NotvalidFms></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
             <Route path="view/:manufacturId" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><ManufactureView logOut={logOut}/></NotvalidInventory></ProtectedRout>}/>
             <Route path="newmanufactur" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><NewManufactur logOut={logOut} inputs={manufacturInputs} title="Add New Manufacturing  "/></NotvalidInventory></ProtectedRout>}/>
             </Route>
 
             <Route path="supplier">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><SupplierList logOut={logOut}/></NotvalidHr></NotvalidInventory></ProtectedRout>} />
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><NotvalidFms userEmail={userEmail}><SupplierList logOut={logOut}/></NotvalidFms></NotvalidHr></NotvalidInventory></ProtectedRout>} />
             <Route path=":supplierId" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><Supplier logOut={logOut} /></NotvalidInventory></ProtectedRout>} />
             <Route path="view/:supplierId" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><SupplierView logOut={logOut}/></NotvalidInventory></ProtectedRout>} />
             <Route path="newsupply" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><NewSupplier logOut={logOut}  inputs={supplierInputs} title="Add New Supplier"/></NotvalidInventory></ProtectedRout>} />
@@ -240,11 +277,54 @@ function App() {
           </Route>
 
             <Route path="supplierorders">
-            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> </NotvalidInventory> <NotvalidHr userEmail={userEmail}><SupplierordersList logOut={logOut} /></NotvalidHr></ProtectedRout>} />
-            <Route path="view/:supplierorderId" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}></NotvalidInventory><SupplyOrderView logOut={logOut}/></ProtectedRout>} />
-            <Route path="newordersupply" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}></NotvalidInventory><NewSupplierorder logOut={logOut}  inputs={supplierorderInputs} title="Order Raw Material from Supplier"/></ProtectedRout>} />
+            <Route index element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><NotvalidFms userEmail={userEmail}><SupplierordersList logOut={logOut} /></NotvalidFms></NotvalidHr></NotvalidInventory></ProtectedRout>} />
+            <Route path="view/:supplierorderId" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><SupplyOrderView logOut={logOut}/></NotvalidInventory></ProtectedRout>} />
+            <Route path="newordersupply" element={<ProtectedRout userdata={userData}> <NotvalidInventory userEmail={userEmail}><NewSupplierorder logOut={logOut}  inputs={supplierorderInputs} title="Order Raw Material from Supplier"/></NotvalidInventory></ProtectedRout>} />
           </Route>
+          <Route path="distributororders">
+          <Route index element={<ProtectedRout userdata={userData}><NotvalidInventory userEmail={userEmail}>  <NotvalidHr userEmail={userEmail}><NotvalidFms userEmail={userEmail}><DistributionOrders logOut={logOut}/></NotvalidFms></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
+          <Route path="view/:id" element={ <ProtectedRout userdata={userData}> <ViewDistributionOrders logOut={logOut}/></ProtectedRout>}/>
+          <Route  path="neworder"  element={  <ProtectedRout userdata={userData}><NewDistributionOrders  logOut={logOut} inputs={supplierorderInputs} title="Order Raw Material from Supplier" /></ProtectedRout> } />
+        </Route>
+        <Route path="distributor">
+        <Route index element={<ProtectedRout userdata={userData}><NotvalidInventory userEmail={userEmail}> <NotvalidHr userEmail={userEmail}><NotvalidFms userEmail={userEmail}><Distributor logOut={logOut} /></NotvalidFms></NotvalidHr></NotvalidInventory></ProtectedRout>}/>
+        <Route path=":distributorId" element={<ProtectedRout userdata={userData}><EditDistributor logOut={logOut} /></ProtectedRout>}/>
+        <Route path="newDistributor" element={<ProtectedRout userdata={userData}><NewDistributor logOut={logOut}/></ProtectedRout>} />
+      </Route>
+      <Route path="journals">
+      <Route index element={<ProtectedRout userdata={userData}> <NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NotvalidHr userEmail={userEmail}><Journals logOut={logOut}/></NotvalidHr></NotvalidInventory></NotvalidScm></ProtectedRout>}/>
+      <Route path=":jeid" element={<ProtectedRout userdata={userData}><EditJournal logOut={logOut}/></ProtectedRout>} />
+      <Route path="newjournal" element={<ProtectedRout userdata={userData}><NewJournal logOut={logOut} /></ProtectedRout>}/>
+    </Route>
+    <Route path="accounts">
+      <Route index element={<ProtectedRout userdata={userData}><NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NotvalidHr userEmail={userEmail}><Accounts logOut={logOut}/></NotvalidHr></NotvalidInventory></NotvalidScm></ProtectedRout>}/>
+      <Route path="view/:accId" element={<ProtectedRout userdata={userData}><ViewAccount logOut={logOut}/></ProtectedRout>}/>
+      <Route path=":accId" element={<ProtectedRout userdata={userData}><EditAccount logOut={logOut}/></ProtectedRout>}/>
+      <Route path="newaccount" element={<ProtectedRout userdata={userData}><NewAccount logOut={logOut}/></ProtectedRout>} />
+    </Route>
+    <Route path="category">
+    <Route index element={<ProtectedRout userdata={userData}><CategoryList logOut={logOut}/></ProtectedRout>}/>
 
+    <Route path=":catId" element={<ProtectedRout userdata={userData}><Category logOut={logOut}/></ProtectedRout>}/>
+    <Route path="newcategory" element={ <ProtectedRout userdata={userData}><NewCategory logOut={logOut}  inputs={categoryInputs} title="Add New Category"/></ProtectedRout>  }/>
+  </Route>
+  <Route path="statement">
+    <Route index element={<ProtectedRout userdata={userData}><NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NotvalidHr userEmail={userEmail}><Statement logOut={logOut} /></NotvalidHr></NotvalidInventory></NotvalidScm></ProtectedRout>}/>
+    <Route path="view/:staId" element={<ProtectedRout userdata={userData}><ViewStatement logOut={logOut}/></ProtectedRout>}/>
+    <Route path=":staId" element={<ProtectedRout userdata={userData}><EditStatement logOut={logOut}/></ProtectedRout>}/>
+  </Route>
+  <Route path="template">
+    <Route index element={<ProtectedRout userdata={userData}><NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NotvalidHr userEmail={userEmail}><Template logOut={logOut}/></NotvalidHr></NotvalidInventory></NotvalidScm></ProtectedRout>} />
+    <Route path="view/:tempId" element={<ProtectedRout userdata={userData}><ViewTemplate logOut={logOut}/></ProtectedRout>}/>
+    <Route path=":tempId" element={<ProtectedRout userdata={userData}><EditTemplate logOut={logOut}/></ProtectedRout>}/>
+    <Route path="newtemplate" element={<ProtectedRout userdata={userData}><NewTemplate logOut={logOut}/></ProtectedRout>}/>
+  </Route>
+  <Route path="fmscategory">
+  <Route index element={<ProtectedRout userdata={userData}><NotvalidScm userEmail={userEmail}> <NotvalidInventory userEmail={userEmail}><NotvalidHr userEmail={userEmail}><FmsCategory logOut={logOut}/></NotvalidHr></NotvalidInventory></NotvalidScm></ProtectedRout>} />
+  <Route path="view/:catId" element={<ProtectedRout userdata={userData}><FmsViewCategory logOut={logOut}/></ProtectedRout>} />
+  <Route path=":catId" element={<ProtectedRout userdata={userData}><FmsEditCategory logOut={logOut}/></ProtectedRout>}/>
+  <Route path="fmsnewcategory" element={<ProtectedRout userdata={userData}><FmsNewCategory logOut={logOut}/></ProtectedRout>}/>
+</Route>
           </Route>
         </Routes>
       </BrowserRouter>
@@ -260,6 +340,13 @@ function App() {
       </EmployeeContextProvider>
       </EmployeeTrainingContextProvider>
       </EmployeeTaskContextProvider>
+      </DistributionOrdersContextProvider>
+      </DistributorContextProvider>
+      </TemplateContextProvider>
+      </StatementContextProvider>
+      </JournalContextProvider>
+      </AccountContextProvider>
+      </FmsCategoryContextProvider>
     </div>
   );
 }

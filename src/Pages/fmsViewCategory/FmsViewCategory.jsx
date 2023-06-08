@@ -11,7 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import FmsCategoryContext from "../../context/FmsCategoryContext";
 
-export default function FmsViewCategory() {
+export default function FmsViewCategory({logOut}) {
   const { detailData, getCategoryById, handleDelete, category1 } =
     useContext(FmsCategoryContext);
 
@@ -106,7 +106,7 @@ export default function FmsViewCategory() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="datatable1">
           <div className="datatableTitle">
             Category Name: {detailData.catName}

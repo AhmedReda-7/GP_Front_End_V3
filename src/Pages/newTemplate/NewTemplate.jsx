@@ -5,7 +5,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import AccountContext from "../../context/AccountContext";
 
-function NewTemplate() {
+function NewTemplate({logOut}) {
 
   const [template, settemplate] = useState({
     tempName: "",
@@ -69,7 +69,7 @@ function NewTemplate() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut}/>
         <div className="container">
           <h1 className="addProductTitle">New Template</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

@@ -4,7 +4,7 @@ import Navbar from "../../Components/navbar/Navbar";
 import axios from "axios";
 import { useState } from "react";
 
-function NewDistributor() {
+function NewDistributor({logOut}) {
   const [distributor, setdistributor] = useState({
     distributorName: "",
     phoneNumber: "",
@@ -38,7 +38,7 @@ function NewDistributor() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">New Distributor</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

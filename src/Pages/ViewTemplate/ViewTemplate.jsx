@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-export default function ViewTemplate() {
+export default function ViewTemplate({logOut}) {
   const { detailData, getTemplateById, handleDelete,template } =
     useContext(TemplateContext);
   const { tempId } = useParams();
@@ -113,7 +113,7 @@ export default function ViewTemplate() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="datatable1">
           <div className="row">
             <button onClick={addStatement}>Add New Statement</button>

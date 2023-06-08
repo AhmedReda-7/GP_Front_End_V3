@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import JournalContext from "../../context/JournalContext";
 
 
-export default function EditJournal() {
+export default function EditJournal({logOut}) {
   const { jeid } = useParams();
 
   const { handleupdate, getJournalById } = useContext(JournalContext);
@@ -49,7 +49,7 @@ export default function EditJournal() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">Edit Journal</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

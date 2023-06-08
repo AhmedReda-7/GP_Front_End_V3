@@ -8,7 +8,7 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import StatementContext from "../../context/StatementContext";
 
-export default function Statement() {
+export default function Statement({logOut}) {
   const { getAllstatement, data, handleDelete } = useContext(StatementContext);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Statement() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="datatable">
           <div className="datatableTitle">
             Statements

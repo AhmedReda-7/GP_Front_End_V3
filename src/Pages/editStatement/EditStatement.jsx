@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import StatementContext from "../../context/StatementContext";
 
 
-export default function EditStatement() {
+export default function EditStatement({logOut}) {
   const { staId } = useParams();
 
   const { handleupdate, getStatementById } = useContext(StatementContext);
@@ -46,7 +46,7 @@ export default function EditStatement() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">Edit Statement</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

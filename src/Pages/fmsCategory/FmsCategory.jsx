@@ -8,7 +8,7 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import FmsCategoryContext from "../../context/FmsCategoryContext";
 
-export default function FmsCategory() {
+export default function FmsCategory({logOut}) {
   const { getAllcategory, data, handleDelete } = useContext(FmsCategoryContext);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function FmsCategory() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut}/>
         <div className="datatable">
           <div className="datatableTitle">
             Categories

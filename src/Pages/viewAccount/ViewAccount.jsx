@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-export default function ViewAccount() {
+export default function ViewAccount({logOut}) {
   const { accId } = useParams();
   const { detailData, getAccountById, handleDelete, account } =
     useContext(AccountContext);
@@ -108,7 +108,7 @@ export default function ViewAccount() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="datatable1">
           <div className="datatableTitle">
             Account Name: {detailData.accName}

@@ -8,7 +8,7 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import JournalContext from "../../context/JournalContext";
 
-export default function Journals() {
+export default function Journals({logOut}) {
   const { getAlljournal, data, handleDelete } = useContext(JournalContext);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Journals() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
+        <Navbar logOut={logOut}/>
         <div className="datatable">
           <div className="datatableTitle">
             Journals

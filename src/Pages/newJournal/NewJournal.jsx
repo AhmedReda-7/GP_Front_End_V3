@@ -8,7 +8,7 @@ import { useContext } from "react";
 import AccountContext from "../../context/AccountContext";
 import { useEffect } from "react";
 
-function NewJournal() {
+function NewJournal({logOut}) {
 
   const { data, getAllaccount } = useContext(AccountContext);
 
@@ -120,7 +120,7 @@ function NewJournal() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">New Journal</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

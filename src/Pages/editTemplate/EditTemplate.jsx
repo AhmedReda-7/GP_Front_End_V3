@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import TemplateContext from "../../context/TemplateContext";
 
 
-export default function EditTemplate() {
+export default function EditTemplate({logOut}) {
   const { tempId } = useParams();
 
   const { handleupdate, getTemplateById } = useContext(TemplateContext);
@@ -44,7 +44,7 @@ export default function EditTemplate() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">Edit Template</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

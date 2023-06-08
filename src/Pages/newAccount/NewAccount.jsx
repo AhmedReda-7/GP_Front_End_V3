@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 
 
-function NewAccount() {
+function NewAccount({logOut}) {
 
   const [account, setaccount] = useState({
     accName: "",
@@ -39,7 +39,7 @@ function NewAccount() {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar logOut={logOut}/>
         <div className="container">
           <h1 className="addProductTitle">New Account</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

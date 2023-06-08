@@ -19,7 +19,7 @@ const Home = ({logOut}) => {
  
 
     <div className='chart'>
-    <iframe title="PowerBI project" width="1000" height="500" src="https://app.powerbi.com/reportEmbed?reportId=6465d48f-86c2-48c5-aad4-79cf21892e24&autoAuth=true&ctid=aadc0e0a-65ee-471a-99a1-9f86faecbaed" frameborder="0" allowFullScreen="false"></iframe></div>
+    <iframe title="GP_ERP_BI" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=2b3684d2-ba63-4fb5-b4e1-3ee2dd8610c4&autoAuth=true&ctid=aadc0e0a-65ee-471a-99a1-9f86faecbaed" frameborder="0" allowFullScreen="true"></iframe>    </div>
     </div>
     </div>
   )
