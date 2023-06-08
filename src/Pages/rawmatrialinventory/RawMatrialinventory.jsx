@@ -7,7 +7,7 @@ import { useContext ,useEffect,useState} from 'react';
 import RawMatrialInventoryContext from "../../context/RawMatrialInventoryContext";
 import Swal from 'sweetalert2';
 
-export default function RawMatrialinventory() {
+export default function RawMatrialinventory({logOut}) {
     const {rawmatrialinventoryId} = useParams(); 
     const navigate = useNavigate();
 
@@ -67,7 +67,7 @@ export default function RawMatrialinventory() {
     <div className="list">
    <Sidebar/>
     <div className="listContainer">
-     <Navbar/>
+    <Navbar logOut={logOut}/>
     <div className="rawmatrialinventory">
       <div className="rawmatrialinventoryTitleContainer">
         <h1 className="rawmatrialinventoryTitle">rawmatrialinventory</h1>

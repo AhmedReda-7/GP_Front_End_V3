@@ -7,10 +7,9 @@ import SupplierContext from "../../context/SupplierContext";
 import axios from "axios";
 import Swal from 'sweetalert2';
 
-export default function Supplier() {
+export default function Supplier({logOut}) {
   const { supplierId } = useParams();
   const navigate = useNavigate();
-
   const [supplyMatraial, setSupplyMatraial] = useState([]);
   const [price, setPrice] = useState("");
   const { handleupdate, getSupllierById, getSuplliermatrialById } =
@@ -86,8 +85,8 @@ export default function Supplier() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
-        <div className="supplier">
+      <Navbar logOut={logOut}/>
+      <div className="supplier">
           <div className="supplierTitleContainer">
             <h1 className="supplierTitle">Supplier</h1>
             <Link to="/supplier/newsupply">

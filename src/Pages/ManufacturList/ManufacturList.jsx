@@ -9,8 +9,8 @@ import axios  from 'axios';
 import ManufactoringContext from "../../context/ManufactoringContext";
 
 
-export default function ManufacturList() {
-
+export default function ManufacturList({logOut}) {
+// const refresh = () => window.location.reload(true);
   const {getAllmanufactur,data}= useContext(ManufactoringContext)
   //console.log(data);
 useEffect(() => {
@@ -44,8 +44,8 @@ useEffect(() => {
     <div className="list">
     <Sidebar/>
     <div className="listContainer">
-      <Navbar/>
-      <div className="datatable">
+    <Navbar logOut={logOut}/>
+    <div className="datatable">
       <div className="datatableTitle">
         Add New Manufacturing
         <Link to="/manufactur/newmanufactur" className="link">

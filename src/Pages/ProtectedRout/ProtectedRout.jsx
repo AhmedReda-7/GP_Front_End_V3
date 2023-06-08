@@ -1,13 +1,12 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom';
 export default function ProtectedRout({userdata ,children}) {
-    if(userdata)
+    if(!localStorage.getItem("token"))
     {
-return children
+        console.log(userdata)
+        return <Navigate to='/'/>
     }
-    else
-    {
-         return <Navigate to='/'/>
-    }
+    return children
+
  
 }

@@ -4,12 +4,12 @@ import Navbar from '../../Components/navbar/Navbar';
 import Datatable from '../../Components/datatable/Datatable';
 
 
-const EmployeeList = () => {
+const EmployeeList = ({logOut}) => {
   return (
     <div className="list">
       <Sidebar/>
       <div className="listContainer">
-        <Navbar/>
+        <Navbar logOut={logOut}/>
          <Datatable/>
       </div>
     </div>

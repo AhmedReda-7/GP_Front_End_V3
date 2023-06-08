@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import CategoryContext from "../../context/CategoryContext";
 import Swal from "sweetalert2";
 
-export default function Category() {
+export default function Category({logOut}) {
   const { categoryId } = useParams();
   const navigate = useNavigate();
 
@@ -54,8 +54,7 @@ export default function Category() {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
-        <div className="category">
+      <Navbar logOut={logOut}/>        <div className="category">
           <div className="categoryTitleContainer">
             <h1 className="categoryTitle">category</h1>
             <Link to="/category/newcategory">

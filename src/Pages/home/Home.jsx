@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import Navbar from '../../Components/navbar/Navbar';
 import Sidebar from '../../Components/sidebar/Sidebar';
@@ -16,23 +14,12 @@ const Home = ({logOut}) => {
     <div className="homeContainer">
     
     <Navbar logOut={logOut}/>
-    <div className='widgets'>
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
-    
-    </div>
-    
-    <div className="charts">
-    <Feature/>
-    <Charts title="User Spending ( Last 6 Months)" aspect={2/1}/>
-    </div>
 
-    <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-          <Table/>
-        </div>
+    
+ 
+
+    <div className='chart'>
+    <iframe title="PowerBI project" width="1000" height="500" src="https://app.powerbi.com/reportEmbed?reportId=6465d48f-86c2-48c5-aad4-79cf21892e24&autoAuth=true&ctid=aadc0e0a-65ee-471a-99a1-9f86faecbaed" frameborder="0" allowFullScreen="false"></iframe></div>
     </div>
     </div>
   )

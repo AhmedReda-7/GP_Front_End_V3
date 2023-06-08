@@ -7,7 +7,7 @@ import AllproductContext from "../../context/AllproductContext";
 import Swal from 'sweetalert2';
 
 
-export default function Product() {
+export default function Product({logOut}) {
     const {productId} = useParams(); 
     const {handleupdate,getProductById} = useContext (AllproductContext);
     const [prodata,setProdata] = useState({
@@ -66,8 +66,8 @@ export default function Product() {
     <div className="list">
    <Sidebar/>
     <div className="listContainer">
-     <Navbar/>
-    <div className="product">
+    <Navbar logOut={logOut}/>
+        <div className="product">
       <div className="productTitleContainer">
         <h1 className="productTitle">Product</h1>
         <Link to="/products/newproduct">

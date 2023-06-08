@@ -1,15 +1,18 @@
 
 import "./newProduct.scss";
-import { useState } from "react";
+import {useEffect, useContext,useState } from "react";
 import Sidebar from './../../Components/sidebar/Sidebar';
 import Navbar from './../../Components/navbar/Navbar';
 import  axios  from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import CategoryContext from "../../context/CategoryContext";
 
 
-function NewProduct({ inputs, title }) {
+function NewProduct({ inputs, title,logOut }) {
   const [file, setFile] = useState("");
+  const { getAllcategory, data } = useContext(CategoryContext);
+
   const [newdata,setNewdata] = useState({
     productName: "",
     productDescription: "",
@@ -17,8 +20,19 @@ function NewProduct({ inputs, title }) {
     salesPrice: 0,
     categoryId: 1
   })
-  const navigate = useNavigate();
+  console.log(newdata.productName);
 
+  const navigate = useNavigate();
+  const productInvOptions = data?.map((product) => {
+    return (
+      <option value={product.categoryId} key={product.categoryId}>
+        {product.categoryId} - {product.categoryName}
+      </option>
+    );
+  });
+  useEffect(() => {
+    getAllcategory();
+  }, [newdata]);
   const handleInputChange = (e) => {
     const newData = {...newdata}
     newData[e.target.name]= e.target.value;
@@ -58,8 +72,8 @@ function NewProduct({ inputs, title }) {
     <div className="newproduct">
     <Sidebar />
     <div className="newContainer">
-    <Navbar />
-    <div className="top">
+    <Navbar logOut={logOut}/>
+        <div className="top">
       <h1>{title}</h1>
     </div>
     <div className="bottom">
@@ -76,8 +90,19 @@ function NewProduct({ inputs, title }) {
       <div className="right">
         <form onSubmit={handleSubmit} >
           
-
-        {inputs?.map((input) => (
+        <div className="" style={{ display: "flex", gap: "15px" }}>
+        <label htmlFor="categoryId">
+         Choose Categeory:
+        </label>
+        <select
+          name="categoryId"
+          id="categoryId"
+          onChange={handleInputChange}
+        >
+          {productInvOptions}
+        </select>
+      </div>
+        {inputs.map((input) => (
           <div className="formInput" key={input.id}>
             <label>{input.label}</label>
             <input type={input.type} name={input.name}  onChange={handleInputChange} placeholder={input.placeholder} />

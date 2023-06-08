@@ -10,7 +10,7 @@ import axios  from 'axios';
 import ProductInventoryContext from "../../context/ProductInventoryContext";
 
 
-export default function ProductinventoryList() {
+export default function ProductinventoryList({logOut}) {
 
   const {getProductInventory,data,handleDelete} = useContext(ProductInventoryContext)
 useEffect(() => {
@@ -49,8 +49,8 @@ useEffect(() => {
     <div className="list">
     <Sidebar/>
     <div className="listContainer">
-      <Navbar/>
-      <div className="datatable">
+    <Navbar logOut={logOut}/>
+          <div className="datatable">
       <div className="datatableTitle">
         Add New ProductInventory
         <Link to="/productsinventory/newproductinventory" className="link">

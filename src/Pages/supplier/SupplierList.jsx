@@ -8,7 +8,7 @@ import SupplierContext from "../../context/SupplierContext";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 
-const SupplierList = () => {
+const SupplierList = ({logOut}) => {
 
  const {getAllsupplier,data,handleDelete} = useContext(SupplierContext)
 useEffect(() => {
@@ -57,8 +57,8 @@ useEffect(() => {
     <div className="list">
       <Sidebar/>
       <div className="listContainer">
-        <Navbar/>
-        <div className="datatable">
+      <Navbar logOut={logOut}/>
+      <div className="datatable">
 <div className="datatableTitle">
 Add New Supplier
   <Link to="/supplier/newsupply" className="link">

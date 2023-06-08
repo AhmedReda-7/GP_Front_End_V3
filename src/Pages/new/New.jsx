@@ -6,7 +6,7 @@ import Navbar from './../../Components/navbar/Navbar';
 import  axios  from 'axios';
 import Swal from 'sweetalert2';
 
-function New({ inputs, title }) {
+function New({ inputs, title ,logOut}) {
   const [file, setFile] = useState("");
   const [employee,setEmployee] = useState({employeeFullName: "",
   taxWithholding: 0,
@@ -53,8 +53,8 @@ function New({ inputs, title }) {
     <div className="new">
     <Sidebar/>
     <div className="newContainer">
-      <Navbar />
-      <div className="top">
+    <Navbar logOut={logOut}/>
+    <div className="top">
         <h1>{title}</h1>
       </div>
       <div className="bottom">

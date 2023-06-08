@@ -6,7 +6,7 @@ import  axios  from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
-function NewCategory({ inputs, title }) {
+function NewCategory({ inputs, title,logOut }) {
   const [file, setFile] = useState("");
   const navigate = useNavigate();
 
@@ -54,8 +54,7 @@ function NewCategory({ inputs, title }) {
     <div className="newcategory">
     <Sidebar />
     <div className="newContainer">
-    <Navbar />
-    <div className="top">
+    <Navbar logOut={logOut}/>    <div className="top">
       <h1>{title}</h1>
     </div>
     <div className="bottom">

@@ -8,7 +8,7 @@ import axios from "axios";
 import ProductInventoryContext from "../../context/ProductInventoryContext";
 import RowMaterial from "./RowMaterial/RowMaterial";
 
-function NewManufactur({ inputs, title }) {
+function NewManufactur({ inputs, title ,logOut }) {
   const [file, setFile] = useState("");
   const { getProductInventory, data } = useContext(ProductInventoryContext);
   const navigate = useNavigate();
@@ -120,8 +120,8 @@ function NewManufactur({ inputs, title }) {
     <div className="newmanufactur">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
-        <div className="top">
+      <Navbar logOut={logOut}/>
+      <div className="top">
           <h1>{title}</h1>
         </div>
 

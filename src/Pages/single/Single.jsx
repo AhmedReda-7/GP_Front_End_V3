@@ -1,12 +1,12 @@
 import { Link ,useParams} from "react-router-dom";
 import { useContext ,useEffect,useState} from 'react';
-import EmployeeContext from "../../context/employee";
+import EmployeeContext from "../../context/EmployeeContext";
 import "./single.scss";
 import Navbar from './../../Components/navbar/Navbar';
 import Sidebar from './../../Components/sidebar/Sidebar';
 
 
-export default function Single() {
+export default function Single({logOut}) {
   const {employeeId} = useParams(); 
   const {handleupdate,getEmployeeById} = useContext (EmployeeContext);
   const [empdata,setEmpdata] = useState({
@@ -56,7 +56,7 @@ return (
   <div className="list">
  <Sidebar/>
   <div className="listContainer">
-   <Navbar/>
+  <Navbar logOut={logOut}/>
   <div className="product">
     <div className="productTitleContainer">
       <h1 className="productTitle">Employee</h1>

@@ -3,8 +3,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import Joi from 'joi';
 import "./login.css"
-import { LineStyleIcon } from '@mui/icons-material/LineStyle';
-import { Link } from 'react-router-dom';
+import pic from "./../../Components/sidebar/logo.jpg";
 export default function Login({saveUserData}) {
   
 
@@ -23,7 +22,7 @@ const [isLoading, setisLoading] = useState(false);
  function getUserData(e)
  {
   let myUser ={...user};
-  // console.log("hello");
+    // console.log("hello");
     // myUser.first_name = e.target.value;
     myUser[e.target.name] = e.target.value;
     setUser (myUser);
@@ -43,10 +42,13 @@ async function sendLoginDataToApi()
       saveUserData();
       navigate('/home');
 
+
   }
   else{
     setisLoading(false);
     setError(data.message);
+    console.log("error");
+    
 
   }
  
@@ -62,7 +64,7 @@ async function sendLoginDataToApi()
      {
           setisLoading(false);
           seterrorList(validation.error.details);
-          console.log(validation.error.details)
+          console.log("error is",validation.error.details)
         ///
           
 
@@ -124,7 +126,9 @@ async function sendLoginDataToApi()
 //   </form>
 }
 <div className='body'>
+<img src={pic} alt="" />
 <form onSubmit={submitLoginForm}>
+
 <div className="container">
         <div className="card">
             <p className="login">Log in</p>
@@ -145,7 +149,7 @@ async function sendLoginDataToApi()
             </div>
 
             <button  type='submit' className='enter'>
-              {isLoading === true ?<i className='fas fa-spinner fa-spin'></i>:'Login'}
+            {isLoading === true ?<i className='fas fa-spinner fa-spin'></i>:'Login'}
              </button>
         </div>
     </div>

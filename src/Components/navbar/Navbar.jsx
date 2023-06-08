@@ -20,12 +20,9 @@ function Navbar({logOut}) {
           <input type="text" placeholder="Search..." />
           <SearchOutlinedIcon />
         </div>
-     <h4 className='lead'> Welcome You'r {localStorage.getItem("name")}.</h4>
+     <h4 className='word'> <span className='spicon'>▶</span>  Welcome You'r {localStorage.getItem("name")}. <span className='spicon'>◀</span></h4>
         <div className="items">
-          <div className="item">
-            <LanguageOutlinedIcon className="icon" />
-            English
-          </div>
+         
           <div className="item">
             <DarkModeOutlinedIcon
               className="icon" onClick={() => dispatch({ type: "TOGGLE" })}

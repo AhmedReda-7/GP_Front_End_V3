@@ -8,7 +8,7 @@ import { useContext ,useEffect,useState} from 'react';
 import ProductInventoryContext from "../../context/ProductInventoryContext";
 import Swal from 'sweetalert2';
 
-export default function Productinventory() {
+export default function Productinventory({logOut}) {
     const {productinventoryId} = useParams(); 
     const navigate = useNavigate();
 
@@ -70,8 +70,7 @@ useEffect(() => {
     <div className="list">
    <Sidebar/>
     <div className="listContainer">
-     <Navbar/>
-    <div className="productinventory">
+    <Navbar logOut={logOut}/>    <div className="productinventory">
       <div className="productinventoryTitleContainer">
         <h1 className="productinventoryTitle">product inventory</h1>
         <Link to="/productsinventory/newproductinventory">

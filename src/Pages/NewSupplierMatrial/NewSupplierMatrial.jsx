@@ -10,7 +10,7 @@ import ProductInventoryContext from "../../context/ProductInventoryContext";
 import RowMatrialSupply from "./RowMatrialSupply/RowMatrialSupply";
 import SupplierContext from "../../context/SupplierContext";
 
-function NewSupplierMatrial({ title ,inputs}) {
+function NewSupplierMatrial({ title ,inputs,logOut}) {
   console.log(document.getElementById("form"));
   const navigate = useNavigate();
 
@@ -132,8 +132,8 @@ const [viewsppmatrial ,setViewsppmatrial] =useState([]);
     <div className="newmanufactur">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
-        <div className="top">
+      <Navbar logOut={logOut}/>
+      <div className="top">
           <h1>{title}</h1>
         </div>
 

@@ -1,6 +1,8 @@
 .home {
   display: flex;
-
+  .chart {
+    margin-top: 50px;
+  }
   .homeContainer {
     flex: 6;
 

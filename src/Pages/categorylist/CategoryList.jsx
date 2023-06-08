@@ -10,7 +10,7 @@ import axios  from 'axios';
 import CategoryContext from "../../context/CategoryContext";
 
 
-export default function CategoryList() {
+export default function CategoryList({logOut}) {
 
   const {getAllcategory,data,handleDelete} = useContext(CategoryContext)
 useEffect(() => {
@@ -22,9 +22,6 @@ useEffect(() => {
 
   const columnscategory = [
   
-
-
-
     {
       field: "action",
       headerName: "Action",
@@ -52,8 +49,7 @@ useEffect(() => {
     <div className="list">
     <Sidebar/>
     <div className="listContainer">
-      <Navbar/>
-      <div className="datatable">
+    <Navbar logOut={logOut}/>      <div className="datatable">
       <div className="datatableTitle">
         Add New Category
         <Link to="/category/newcategory" className="link">

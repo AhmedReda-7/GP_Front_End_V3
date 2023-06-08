@@ -1,18 +1,31 @@
 import "./newmatrialinventory.scss";
 import Sidebar from './../../Components/sidebar/Sidebar';
 import Navbar from './../../Components/navbar/Navbar';
-import { useState } from "react";
+import {useEffect, useContext,useState } from "react";
 import  axios  from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
+import RawMatrialContext from "../../context/RawMatrialContext";
 
-function NewmatrialInventory({ inputs, title }) {
+function NewmatrialInventory({ inputs, title ,logOut}) {
   const [file, setFile] = useState("");
   const navigate = useNavigate();
+  const { getAllRawMatrial, data } = useContext(RawMatrialContext);
 
   const [rawmatrialinventory,setRawmatrialinventory] = useState({
  rawmatrialinventoryName: "",
   rawmatrialinventoryDescription: ""})
+  const productInvOptions = data?.map((product) => {
+    return (
+      <option value={product.materialId} key={product.materialId}>
+        {product.materialId} - {product.materialName}
+      </option>
+    );
+  });
+  useEffect(() => {
+    getAllRawMatrial();
+  }, [rawmatrialinventory]);
+
   const handleInputChange = (e) => {
     const rawmatrialinventoryData = {...rawmatrialinventory}
     rawmatrialinventoryData[e.target.name]= e.target.value;
@@ -50,7 +63,7 @@ function NewmatrialInventory({ inputs, title }) {
     <div className="newrawmatrialinventory">
     <Sidebar />
     <div className="newContainer">
-    <Navbar />
+    <Navbar logOut={logOut}/>
     <div className="top">
       <h1>{title}</h1>
     </div>
@@ -67,7 +80,18 @@ function NewmatrialInventory({ inputs, title }) {
       </div>
       <div className="right">
         <form onSubmit={handleSubmit} >
-          
+        <div className="" style={{ display: "flex", gap: "15px" }}>
+        <label htmlFor="materialId">
+         Choose Raw-Matrial:
+        </label>
+        <select
+          name="materialId"
+          id="materialId"
+          onChange={handleInputChange}
+        >
+          {productInvOptions}
+        </select>
+      </div>
 
           {inputs.map((input) => (
             <div className="formInput" key={input.id}>

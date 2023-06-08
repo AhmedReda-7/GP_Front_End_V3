@@ -7,7 +7,7 @@ import Sidebar from "./../../Components/sidebar/Sidebar";
 import axios from "axios";
 import Swal from 'sweetalert2';
 
-export default function ManufactureView() {
+export default function ManufactureView({logOut}) {
   const { manufacturId } = useParams();
   const navigate = useNavigate();
   const { GetManfacturingOrderById } = useContext(ManufactoringContext);
@@ -113,8 +113,8 @@ timer: 1500
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar />
-        <div className="manufactur">
+      <Navbar logOut={logOut}/>
+      <div className="manufactur">
           <div className="manufacturTitleContainer">
             <h1 className="manufacturTitle">Manufacturing</h1>
             <Link to="/manufactur/newmanufactur">

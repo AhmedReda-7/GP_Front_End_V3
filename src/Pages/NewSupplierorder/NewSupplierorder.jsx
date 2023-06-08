@@ -7,29 +7,29 @@ import SupplierContext from "../../context/SupplierContext";
 import RowMaterial from "./RowMaterial/RowMaterial";
 import RawMatrialContext from "../../context/RawMatrialContext";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
-function NewSupplierorder({ inputs, title }) {
+function NewSupplierorder({ inputs, title,logOut }) {
   const [file, setFile] = useState("");
   const { getAllsupplier, data } = useContext(SupplierContext);
   const { data: allRowMaterial } = useContext(RawMatrialContext);
-  const { getSupllierById, getSuplliermatrialById } =
-    useContext(SupplierContext);
+  const {getSupllierById ,getSuplliermatrialById} = useContext (SupplierContext);
   const [supplyMatraial, setSupplyMatraial] = useState([]);
   const navigate = useNavigate();
 
+
   const [supporder, setSupporder] = useState({
     id: 0,
-    supplierId: 0,
+    supplierId: 0,  
     shippingCost: 0,
     orderedMaterials: [
       {
         materialId: 0,
         materialName: "",
         quantity: 0,
-        price: 0,
-      },
-    ],
+        price: 0
+      }
+    ]
   });
   const supporderOptions = data?.map((supp) => {
     return (
@@ -38,26 +38,32 @@ function NewSupplierorder({ inputs, title }) {
       </option>
     );
   });
-  const rowMaterialOptions = allRowMaterial?.map((material) => (
+  const  rowMaterialOptions = allRowMaterial?.map((material) => (
     <option value={material.materialId} key={material.materialId}>
       {material.materialId} - {material.materialName}{" "}
     </option>
   ));
 
-  // for (let item of supplyMatraial )
-  // {
-  //   if(item && item.materialName === localStorage.getItem("selectValue"))
-  //   {
-  //     setSelectedPrice (item.pricePerUnit);
-  //     console.log("fatna",item.pricePerUnit)
-  //      break;
+// for (let item of supplyMatraial )
+// {
+//   if(item && item.materialName === localStorage.getItem("selectValue"))
+//   {
+//     setSelectedPrice (item.pricePerUnit);
+//     console.log("fatna",item.pricePerUnit)
+//      break;
 
-  //   }
-  // }
+//   }
+// }
+
+
+
 
   useEffect(() => {
     getAllsupplier();
   }, [supporder]);
+
+
+
 
   const deleteRow = (indx) => {
     const data = supporder;
@@ -76,7 +82,7 @@ function NewSupplierorder({ inputs, title }) {
     setSupporder(newManu);
   };
 
-  async function handleInputChange(e) {
+  async function handleInputChange (e)  {
     const supporderData = { ...supporder };
     // const cost =supporderData.shippingCost
     supporderData[e.target.name] = e.target.value;
@@ -89,22 +95,23 @@ function NewSupplierorder({ inputs, title }) {
     // setSupplyMatraial(supplier.data);
     console.log(supporderData.shippingCost);
     setSupporder(supporderData);
-  }
-  async function handleInputChanges(e) {
+    
+  };
+  async function handleInputChanges (e)  {
     const supporderData = { ...supporder };
     supporderData[e.target.name] = e.target.value;
-    console.log("====================================");
+    console.log('====================================');
     console.log(e.target.value);
-    console.log("====================================");
+    console.log('====================================');
     const supplier = await getSuplliermatrialById(e.target.value);
     localStorage.setItem("selectedId",e.target.value);
     console.log(supplier.data)
-
     setSupplyMatraial(supplier.data);
     setSupporder(supporderData);
-  }
+    
+  };
 
-  async function sendData(id, cost) {
+  async function sendData(id,cost) {
     try {
       const res = await axios.post(
         `https://localhost:44393/api/OrderRawMaterialFromSupplier?supplierId=${id}&shippingCost=${cost}`,
@@ -119,11 +126,8 @@ function NewSupplierorder({ inputs, title }) {
     } catch (err) {
       console.log("error ", err);
     }
-    console.log(typeof id, typeof cost);
-    console.log(
-      supporder.orderedMaterials.materialId,
-      supporder.orderedMaterials.quantity
-    );
+    console.log(typeof(id),typeof(cost));
+    console.log(supporder.orderedMaterials.materialId,supporder.orderedMaterials.quantity);
 
     console.log(supporder);
     // console.log(res);
@@ -139,17 +143,18 @@ function NewSupplierorder({ inputs, title }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    sendData(supporder.supplierId, supporder.shippingCost);
-
+    sendData(supporder.supplierId,supporder.shippingCost);
+    
     Swal.fire({
-      icon: "success",
-      title: "Added!",
+      icon: 'success',
+      title: 'Added!',
       text: `Supplier order has been Added.`,
       showConfirmButton: false,
-      timer: 1500,
-    });
+      timer: 1500
+  });
   };
 
+  
   const renderedRowMaterials = supporder.orderedMaterials.map(
     (material, indx) => (
       <RowMaterial
@@ -167,8 +172,8 @@ function NewSupplierorder({ inputs, title }) {
     <div className="newmanufactur">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
-        <div className="top">
+      <Navbar logOut={logOut}/>
+      <div className="top">
           <h1>{title}</h1>
         </div>
 
@@ -189,8 +194,6 @@ function NewSupplierorder({ inputs, title }) {
                 <label htmlFor="supplierId">
                 choose Supplier
                 </label>
-
-        
                 <select
                   name="supplierId"
                   id="supplierId"
@@ -211,33 +214,37 @@ function NewSupplierorder({ inputs, title }) {
                   />
                 </div>
               ))}
-
-              {supporder.orderedMaterials.map((material, indx) => (
-                <RowMaterial
-                  key={indx}
-                  indx={indx}
-                  supporder={supporder}
-                  setSupporder={setSupporder}
-                  material={material}
-                  deleteRow={deleteRow}
-                >
-                  {supplyMatraial.map((item) => (
-                    <option key={item.materialId} value={item.materialId}>
-                      {" "}
-                      {"materialName: "}
-                      {item.materialName} - {"pricePerUnit: "}
-                      {item.pricePerUnit}
-                      {"  $"}
-                    </option>
-                  ))}
-                  {
+              
+              {supporder.orderedMaterials.map(
+                (material, indx) => (
+                  <RowMaterial
+                    key={indx}
+                    indx={indx}
+                    supporder={supporder}
+                    setSupporder={setSupporder}
+                    material={material}
+                    deleteRow={deleteRow}
+                  >
+                  {supplyMatraial.map (item=>
+                    
+                    
+                  <option key={item.materialId} value={item.materialId}> {"materialName: "}{item.materialName} - {"pricePerUnit: "}{item.pricePerUnit}{"  $"}</option> 
+                
+                    
+                    
+                    )}
+                    {
                     // {supplyMatraial.map(item =>
+                  
                     //       <span> {item.pricePerUnit}  </span>
                     // )}
-                  }
-                </RowMaterial>
-              ))}
-
+                    }
+                  </RowMaterial>
+                )
+              )}
+      
+              
+            
               <button type="button" onClick={addMaterial} className="btnadd">
                 Add Row Material
               </button>

@@ -10,7 +10,7 @@ import { useState ,useEffect,useContext} from "react";
 import axios  from 'axios';
 import RawMatrialInventoryContext from "../../context/RawMatrialInventoryContext";
 
-export default function RawMatrialInventoryList() {
+export default function RawMatrialInventoryList({logOut}) {
   const {getAllRawMatrialInventory,data,handleDelete} = useContext(RawMatrialInventoryContext)
   
 useEffect(() => {
@@ -47,8 +47,8 @@ useEffect(() => {
     <div className="list">
     <Sidebar/>
     <div className="listContainer">
-      <Navbar/>
-      <div className="datatable">
+    <Navbar logOut={logOut}/>
+    <div className="datatable">
       <div className="datatableTitle">
         Add New Raw Material Inventory
         <Link to="/rawmatrialinventory/newrawmatrialinventory" className="link">

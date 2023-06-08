@@ -11,7 +11,7 @@ import axios  from 'axios';
 import RawMatrialContext from "../../context/RawMatrialContext";
 
 
-export default function RawMatrialList() {
+export default function RawMatrialList({logOut}) {
   const {data, getAllRawMatrial,handleDelete} = useContext(RawMatrialContext)
   
 useEffect(() => {
@@ -48,8 +48,8 @@ useEffect(() => {
     <div className="list">
     <Sidebar/>
     <div className="listContainer">
-      <Navbar/>
-      <div className="datatable">
+    <Navbar logOut={logOut}/>
+    <div className="datatable">
       <div className="datatableTitle">
         Add New RawMaterial
         <Link to="/rawmatrial/newrawmatrial" className="link">

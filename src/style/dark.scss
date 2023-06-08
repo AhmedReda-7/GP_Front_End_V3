@@ -1,4 +1,11 @@
 .app.dark {
+  .spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 15px;
+    right: 15px;
+  }
     background-color:rgb(14, 14, 14);
     color: rgb(255, 251, 251);
   
@@ -107,6 +114,6 @@
     input{
         background-color: transparent;
     }
-   
+ 
   }
   

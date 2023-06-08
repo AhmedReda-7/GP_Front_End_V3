@@ -8,7 +8,7 @@ import { useContext ,useEffect,useState} from 'react';
 import RawMatrialContext from "../../context/RawMatrialContext";
 import Swal from 'sweetalert2';
 
-export default function RawMatrial() {
+export default function RawMatrial({logOut}) {
   const {materialId} = useParams(); 
   const {handleupdate,getRawmatrialById} = useContext (RawMatrialContext);
   const [rawdata,setRawdata] = useState({
@@ -64,7 +64,7 @@ useEffect(() => {
     <div className="list">
    <Sidebar/>
     <div className="listContainer">
-     <Navbar/>
+    <Navbar logOut={logOut}/>
     <div className="rawmatrial">
       <div className="rawmatrialTitleContainer">
         <h1 className="rawmatrialTitle">RawMatrial</h1>

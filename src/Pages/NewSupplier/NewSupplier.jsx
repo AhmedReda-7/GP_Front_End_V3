@@ -6,7 +6,7 @@ import  axios  from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
-function NewSupplier({ inputs, title }) {
+function NewSupplier({ inputs, title,logOut }) {
   const [file, setFile] = useState("");
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ function NewSupplier({ inputs, title }) {
     <div className="newsupply">
     <Sidebar />
     <div className="newContainer">
-    <Navbar />
+    <Navbar logOut={logOut}/>
     <div className="top">
       <h1>{title}</h1>
     </div>

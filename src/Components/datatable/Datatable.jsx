@@ -4,13 +4,13 @@ import { userColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState ,useEffect, useContext} from "react";
 import axios  from 'axios';
-import EmployeeContext from "../../context/employee";
+import EmployeeContext from "../../context/EmployeeContext";
 
 const Datatable = () => {
 
- const {getAllEmployee,data,handleDelete} = useContext(EmployeeContext)
+ const {getAllemployee,dataemp,handleDelete} = useContext(EmployeeContext)
 useEffect(() => {
- getAllEmployee();
+ getAllemployee();
 }, []);
   
 
@@ -47,14 +47,14 @@ useEffect(() => {
     <div className="datatable">
       <div className="datatableTitle">
         Add New Employee
-        <Link to="/employee/new" className="link">
+        <Link to="/employee/newemployee" className="link">
           Add New
         </Link>
       </div>
       <DataGrid
         className="datagrid"
         getRowId={(row) => row.employeeId}
-        rows={data}
+        rows={dataemp}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}

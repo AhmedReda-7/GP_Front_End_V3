@@ -2,8 +2,8 @@
 .body
 {
   display: flex;
-  align-items: center;
-  justify-content: center;
+ justify-content: space-around;
+
 }
 .login {
   color: #6439ff;
@@ -90,6 +90,7 @@
   cursor: pointer !important;
   background-color: transparent !important;
   transition: 0.5s !important;
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase !important;
   font-size: 10px!important;
   letter-spacing: 2px !important;

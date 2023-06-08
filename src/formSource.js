@@ -62,6 +62,22 @@ export const categoryInputs = [
    
     
   ];
+export const HrManagerInputs = [
+  /*{
+  "hrfullName": "string",
+  "hrEmail": "string"
+}*/
+    {
+      id: 1,
+      label: "hrfullName",
+      name: "hrfullName",
+      type: "text",
+      placeholder: "",
+    },
+  
+   
+    
+  ];
   
 export const rawmatrialInputs = [
   /*{
@@ -95,13 +111,7 @@ export const rawmatrialinventoryInputs = [
   "area": "string",
   "reorderingPoint": 0
 }*/
-    {
-      id: 1,
-      label: "materialId",
-      name: "materialId",
-      type: "number",
-      placeholder: "Blackacre",
-    },
+
     {
       id: 2,
       label: "quantity",
@@ -137,13 +147,7 @@ export const rawmatrialinventoryInputs = [
       type: "number",
       placeholder: "",
     },
-    {
-      id: 7,
-      label: "hasReachedROP",
-      name: "hasReachedROP",
-      type: "text",
-      placeholder: "",
-    },
+
     
     
   ];
@@ -184,13 +188,7 @@ export const rawmatrialinventoryInputs = [
         type: "number",
         placeholder: "0",
       },
-      {
-        id: 5,
-        label: "categoryId",
-        name: "categoryId",
-        type: "number",
-        placeholder: "0",
-      },
+    
       
     ];
     
@@ -203,43 +201,37 @@ export const rawmatrialinventoryInputs = [
   "area": "string",
   "reorderingPoint": 0
 }*/
+    
       {
         id: 1,
-        label: "productId",
-        name: "productId",
-        type: "number",
-        placeholder: "",
-      },
-      {
-        id: 2,
         label: "quantity",
         name: "quantity",
         type: "number",
         placeholder: "",
       },
       {
-        id: 3,
+        id: 2,
         label: "shippingDate",
         name: "shippingDate",
         type: "datetime-local",
         placeholder: "2023-02-28T20:43:57.493Z",
       },
       {
-        id: 4,
+        id: 3,
         label: "monthlyCosts",
         name: "monthlyCosts",
         type: "number",
         placeholder: "0",
       },
       {
-        id: 5,
+        id: 4,
         label: "area",
         name: "area",
         type: "text",
         placeholder: "",
       },
       {
-        id: 6,
+        id: 5,
         label: "reorderingPoint",
         name: "reorderingPoint",
         type: "number",
@@ -376,5 +368,133 @@ export const rawmatrialinventoryInputs = [
           placeholder: "",
         },
         
+        
+      ];
+    export const EmployeeInputs = [
+      /*{
+     "employeeFullName": "testt",
+  "taxWithholding": 250,
+  "hoursWorked": 10,
+  "dateOfJoining": "2023-05-17T19:43:58.755Z",
+  "attendenceTime": "2023-05-17T19:43:58.755Z",
+  "holidays": "2023-05-17T19:43:58.755Z",
+  "employeeSalary": 1000,
+  "hrmanagerId": 3
+    }*/
+        
+ 
+     
+        {
+          id: 2,
+          label: "employeeFullName",
+          name: "employeeFullName",
+          type: "text",
+          placeholder: "",
+        },
+        {
+          id: 3,
+          label: "taxWithholding",
+          name: "taxWithholding",
+          type: "number",
+          placeholder: "",
+        },
+        {
+          id: 4,
+          label: "hoursWorked",
+          name: "hoursWorked",
+          type: "number",
+          placeholder: "",
+        },
+        {
+          id: 5,
+          label: "dateOfJoining",
+          name: "dateOfJoining",
+          type: "datetime-local",
+          placeholder: "",
+        },
+        {
+          id: 6,
+          label: "attendenceTime",
+          name: "attendenceTime",
+          type: "datetime-local",
+          placeholder: "",
+        },
+        {
+          id: 7,
+          label: "holidays",
+          name: "holidays",
+          type: "datetime-local",
+          placeholder: "",
+        },
+        {
+          id: 8,
+          label: "employeeSalary",
+          name: "employeeSalary",
+          type: "number",
+          placeholder: "",
+        },
+        
+        
+      ];
+    export const EmployeeTrainInputs = [
+      /*{
+  "trainningType": "string",
+  "trainningDescription": "string",
+  "employeeId": 32,
+  "hrmangerId": 5
+    }*/
+        
+ 
+    
+   
+        {
+          id: 4,
+          label: "trainningType",
+          name: "trainningType",
+          type: "text",
+          placeholder: "",
+        },
+        {
+          id: 5,
+          label: "trainningDescription",
+          name: "trainningDescription",
+          type: "text",
+          placeholder: "",
+        },
+       
+        
+      ];
+    export const EmployeetaskInputs = [
+      /*{
+  "taskDescription": "string",
+  "taskAssignedTime": "2023-05-19T07:50:19.704Z",
+  "taskDeadlineTime": "2023-05-19T07:50:19.704Z",
+  "emplyeeId": 0
+    }*/
+        
+ 
+        {
+          id: 2,
+          label: "taskDescription",
+          name: "taskDescription",
+          type: "text",
+          placeholder: "",
+        },
+        {
+          id: 3,
+          label: "taskAssignedTime",
+          name: "taskAssignedTime",
+          type: "datetime-local",
+          placeholder: "",
+        },
+        {
+          id: 4,
+          label: "taskDeadlineTime",
+          name: "taskDeadlineTime",
+          type: "datetime-local",
+          placeholder: "",
+        },
+      
+       
         
       ];

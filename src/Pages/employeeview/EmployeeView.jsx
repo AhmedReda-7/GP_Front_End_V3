@@ -1,31 +1,34 @@
 import { Link ,useParams} from "react-router-dom";
 import { useContext ,useEffect,useState} from 'react';
-import EmployeeContext from "../../context/employee";
+import EmployeeContext from "../../context/EmployeeContext";
 import "./employeeview.scss";
 import Navbar from './../../Components/navbar/Navbar';
 import Sidebar from './../../Components/sidebar/Sidebar';
 
 
-export default function EmployeeView() {
-  const {employeeId} = useParams(); 
+export default function EmployeeView({logOut}) {
+  const {employeeid} = useParams(); 
   const {getEmployeeById} = useContext (EmployeeContext);
   const [empdata,setEmpdata] = useState({
+    employeeId: 0,
+    hrName: "",
     employeeFullName: "",
     taxWithholding: 0,
     hoursWorked: 0,
-    dateOfJoining: "2023-03-23T22:05:35.637Z",
-    attendenceTime: "2023-03-23T22:05:35.637Z",
-    holidays: "2023-03-23T22:05:35.637Z",
+    dateOfJoining: "2023-05-17T19:44:48.087",
+    attendenceTime: "2023-05-17T19:44:48.087",
+    holidays: "2023-05-17T00:00:00",
     employeeSalary: 0,
-    employeeId: 0
+    hrid: 0
   });
+  console.log(empdata.hrName);
 
 
 async function getemployee ()
 {
 
 
- const employee = await getEmployeeById(employeeId);
+ const employee = await getEmployeeById(employeeid);
  console.log('====================================');
  console.log(employee);
  console.log('====================================');
@@ -44,7 +47,7 @@ return (
   <div className="list">
  <Sidebar/>
   <div className="listContainer">
-   <Navbar/>
+  <Navbar logOut={logOut}/>
   <div className="product">
     <div className="productTitleContainer">
       <h1 className="productTitle">Employee</h1>
@@ -65,7 +68,9 @@ return (
         <p className="paddorder"><span className="spanform">attendenceTime:  </span>{empdata.attendenceTime}</p>
         <p className="paddorder"><span className="spanform">holidays:  </span>{empdata.holidays}</p>
         <p className="paddorder"><span className="spanform">employeeSalary:  </span>{empdata.employeeSalary}</p>
-        <p className="paddorder"><span className="spanform">employeeId:  </span>{empdata.employeeId}</p>
+        <p className="paddorder"><span className="spanform">employeeid:  </span>{empdata.employeeId}</p>
+        <p className="paddorder"><span className="spanform">hrName:  </span>{empdata.hrName}</p>
+        <p className="paddorder"><span className="spanform">hrmanagerId:  </span>{empdata.hrid}</p>
     </div>
  
 </div>
