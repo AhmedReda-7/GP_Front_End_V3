@@ -10,12 +10,13 @@ import AccountContext from "../../context/AccountContext";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function ViewAccount({logOut}) {
   const { accId } = useParams();
   const { detailData, getAccountById, handleDelete, account } =
     useContext(AccountContext);
-
+console.log(account);
   useEffect(() => {
     getAccountById(accId);
   }, [accId]);
@@ -45,6 +46,7 @@ export default function ViewAccount({logOut}) {
     catId: "",
     accId: accId,
   });
+
   const [AccountCategories, setAccountCategories] = useState([]);
 
   const handleInputChange = (e) => {
@@ -68,6 +70,13 @@ export default function ViewAccount({logOut}) {
     e.preventDefault();
 
     sendData();
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `category has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
     window.location.reload();
   };
 
@@ -77,6 +86,7 @@ export default function ViewAccount({logOut}) {
     );
 
     setAccountCategories(accountObject.data);
+    
   }
 
   useEffect(() => {
@@ -109,7 +119,7 @@ export default function ViewAccount({logOut}) {
       <Sidebar />
       <div className="listContainer">
         <Navbar logOut={logOut} />
-        <div className="datatable1">
+        <div className="datatable2">
           <div className="datatableTitle">
             Account Name: {detailData.accName}
             <br></br>
@@ -151,11 +161,11 @@ export default function ViewAccount({logOut}) {
           <h2>
             this Account is Listed in {AccountCategories.length} Categories :
           </h2>
-          {AccountCategories.map((category) => (
-            <div className="AccountCategories">
+          {AccountCategories.map((category, index) => (
+            <div key={category.catId} className="AccountCategories">
               <h3> Category Id: {category.catId} -</h3>
               <br />
-              <h3>- Name: {account.accCategories} </h3>
+              <h3>- Name: {account.accCategories[index]} </h3>
               <br />
             </div>
           ))}

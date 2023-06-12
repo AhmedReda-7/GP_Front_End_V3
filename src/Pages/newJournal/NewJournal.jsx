@@ -7,9 +7,9 @@ import Swal from "sweetalert2";
 import { useContext } from "react";
 import AccountContext from "../../context/AccountContext";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-function NewJournal({logOut}) {
-
+function NewJournal({ logOut }) {
   const { data, getAllaccount } = useContext(AccountContext);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ function NewJournal({logOut}) {
     jeaccount1: "",
     jeaccount2: "",
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const journalData = { ...journal };
@@ -41,55 +42,20 @@ function NewJournal({logOut}) {
       `https://localhost:44393/api/AddNewFmsJournalEntry`,
       journalData
     );
+        navigate("/journals");
+
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (journal.jedebit !== journal.jecredit) {
-      Swal.fire({
-        position: "middle",
-        icon: "error",
-        title: "Debit and Credit values must be equal",
-        showConfirmButton: false,
-        timer: 3000,
-      });
-      return;
-    }
-
-    try {
-      setjournal({
-        jename: "",
-        jedescription: "",
-        jecredit: "",
-        jedebit: "",
-        jedate: "",
-        jeaccount1: "",
-        jeaccount2: "",
-      });
-      Swal.fire({
-        position: "middle",
-        icon: "success",
-        title: "New Journal is added",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-    } catch (error) {
-      console.error(error);
-      Swal.fire({
-        position: "middle",
-        icon: "error",
-        title: "Failed to add new Journal",
-        showConfirmButton: false,
-        timer: 3000,
-      });
-      setjournal((prevState) => ({
-        ...prevState,
-        jeaccount1: "",
-        jeaccount2: "",
-      }));
-    }
     sendData();
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `journal has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   const newtempOrderOptions = data.map((temp) => {
@@ -115,7 +81,6 @@ function NewJournal({logOut}) {
     );
   });
 
-  
   return (
     <div className="newProduct">
       <Sidebar />
@@ -145,7 +110,7 @@ function NewJournal({logOut}) {
               />
             </div>
             <div className="addProductItem">
-              <label>Credit</label>
+              <label>Debit</label>
               <input
                 type="number"
                 name="jecredit"
@@ -155,7 +120,7 @@ function NewJournal({logOut}) {
               />
             </div>
             <div className="addProductItem">
-              <label>Debit</label>
+              <label>Credit</label>
               <input
                 type="number"
                 name="jedebit"

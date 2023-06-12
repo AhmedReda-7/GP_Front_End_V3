@@ -3,15 +3,15 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-
-function NewAccount({logOut}) {
-
+function NewAccount({ logOut }) {
   const [account, setaccount] = useState({
     accName: "",
     increaseMode: "",
   });
-
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     const accountData = { ...account };
 
@@ -27,19 +27,27 @@ function NewAccount({logOut}) {
       `https://localhost:44393/api/FmsAddAccount`,
       accountData
     );
+    navigate("/accounts");
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     sendData();
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `Account has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar logOut={logOut}/>
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">New Account</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>

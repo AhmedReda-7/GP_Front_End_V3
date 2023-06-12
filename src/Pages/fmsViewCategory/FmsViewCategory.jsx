@@ -2,7 +2,7 @@ import "./FmsViewCategory.css";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { fmsCategoryCoulm } from "../../dummyData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
@@ -10,11 +10,12 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import FmsCategoryContext from "../../context/FmsCategoryContext";
+import Swal from "sweetalert2";
 
 export default function FmsViewCategory({logOut}) {
   const { detailData, getCategoryById, handleDelete, category1 } =
     useContext(FmsCategoryContext);
-
+console.log(category1);
   const { catId } = useParams();
 
   useEffect(() => {
@@ -67,6 +68,13 @@ export default function FmsViewCategory({logOut}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     sendData();
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `Account has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
     window.location.reload();
   };
 
@@ -107,7 +115,7 @@ export default function FmsViewCategory({logOut}) {
       <Sidebar />
       <div className="listContainer">
         <Navbar logOut={logOut} />
-        <div className="datatable1">
+        <div className="datatable2">
           <div className="datatableTitle">
             Category Name: {detailData.catName}
             <br></br>
@@ -146,11 +154,11 @@ export default function FmsViewCategory({logOut}) {
         </div>
         <div className="catdev">
           <h2>this Category has {AccountCategories.length} Accounts :</h2>
-          {AccountCategories.map((Account) => (
+          {AccountCategories.map((Account, index) => (
             <div className="AccountCategories">
               <h3>Account Id: {Account.accId} -</h3>
               <br />
-              <h3>- Name: {category1.catAccounts}</h3>
+              <h3>- Name: {category1.catAccounts[index]}</h3>
               <br />
             </div>
           ))}

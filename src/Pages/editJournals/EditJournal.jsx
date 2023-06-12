@@ -1,16 +1,17 @@
 import "./EditJournal.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
 import JournalContext from "../../context/JournalContext";
+import Swal from "sweetalert2";
 
 
 export default function EditJournal({logOut}) {
   const { jeid } = useParams();
 
   const { handleupdate, getJournalById } = useContext(JournalContext);
-
+const navigate = useNavigate();
   const [jedata, setjedata] = useState({
     jename: "",
     jedescription: "",
@@ -25,6 +26,14 @@ export default function EditJournal({logOut}) {
     e.preventDefault();
 
     handleupdate(jeid, jedata);
+    Swal.fire({
+      icon: "success",
+      title: "Updated!",
+      text: `${jedata.jename} has been updated.`,
+      showConfirmButton: false,
+      timer: 2000,
+    });
+    navigate("/journals");
   };
 
   const handleChange = (e) => {

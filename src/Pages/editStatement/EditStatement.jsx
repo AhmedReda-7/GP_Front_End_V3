@@ -1,15 +1,17 @@
 import "./EditStatement.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
 import StatementContext from "../../context/StatementContext";
+import Swal from "sweetalert2";
 
 
 export default function EditStatement({logOut}) {
   const { staId } = useParams();
-
-  const { handleupdate, getStatementById } = useContext(StatementContext);
+const navigate = useNavigate();
+  const { handleupdate, returnStatementById } =
+    useContext(StatementContext);
 
   const [stadata, setstadata] = useState({
     staName: "",
@@ -22,6 +24,15 @@ export default function EditStatement({logOut}) {
     e.preventDefault();
 
     handleupdate(staId, stadata);
+        Swal.fire({
+          icon: "success",
+          title: "Updated!",
+          text: `${stadata.staName} has been updated.`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        navigate("/statement");
+
   };
 
   const handleChange = (e) => {
@@ -33,7 +44,7 @@ export default function EditStatement({logOut}) {
   };
 
   async function getStatement() {
-    const statement = await getStatementById(staId);
+    const statement = await returnStatementById(staId);
 
     setstadata(statement.data);
   }

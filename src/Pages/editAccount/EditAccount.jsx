@@ -1,15 +1,18 @@
 import "./EditAccount.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
 import AccountContext from "../../context/AccountContext";
+import Swal from "sweetalert2";
 
 
 export default function EditAccount({logOut}) {
   const { accId } = useParams();
+const navigate = useNavigate();
 
-  const { handleupdate, getAccountById } = useContext(AccountContext);
+  const { handleupdate, returnAccountById } =
+    useContext(AccountContext);
 
   const [accdata, setaccdata] = useState({
     accName: "",
@@ -20,6 +23,14 @@ export default function EditAccount({logOut}) {
     e.preventDefault();
 
     handleupdate(accId, accdata);
+    Swal.fire({
+      icon: "success",
+      title: "Updated!",
+      text: `${accdata.accName} has been updated.`,
+      showConfirmButton: false,
+      timer: 2000,
+    });
+    navigate("/accounts");
   };
 
   const handleChange = (e) => {
@@ -31,7 +42,7 @@ export default function EditAccount({logOut}) {
   };
 
   async function getAccount() {
-    const account = await getAccountById(accId);
+    const account = await returnAccountById(accId);
     setaccdata(account.data);
   }
 

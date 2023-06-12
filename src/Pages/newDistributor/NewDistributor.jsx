@@ -3,18 +3,19 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import axios from "axios";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-function NewDistributor({logOut}) {
+function NewDistributor({ logOut }) {
   const [distributor, setdistributor] = useState({
     distributorName: "",
     phoneNumber: "",
     email: "",
     address: "",
   });
-
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     const distributorData = { ...distributor };
-
     distributorData[e.target.name] = e.target.value;
 
     setdistributor(distributorData);
@@ -27,11 +28,19 @@ function NewDistributor({logOut}) {
       `https://localhost:44393/api/AddNewDistributor`,
       distributorData
     );
+    navigate("/distributor");
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     sendData();
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `distributor has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (

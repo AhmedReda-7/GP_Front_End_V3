@@ -1,6 +1,5 @@
 import "./Journals.css";
 import { DataGrid } from "@mui/x-data-grid";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { journalCoulm } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useEffect, useContext } from "react";
@@ -9,7 +8,7 @@ import Navbar from "../../Components/navbar/Navbar";
 import JournalContext from "../../context/JournalContext";
 
 export default function Journals({logOut}) {
-  const { getAlljournal, data, handleDelete } = useContext(JournalContext);
+  const { getAlljournal, data } = useContext(JournalContext);
 
   useEffect(() => {
     getAlljournal();
@@ -21,7 +20,7 @@ export default function Journals({logOut}) {
 
       headerName: "Action",
 
-      width: 130,
+      width: 70,
 
       renderCell: (params) => {
         return (

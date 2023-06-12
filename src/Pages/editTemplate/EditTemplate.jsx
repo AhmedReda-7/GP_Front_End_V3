@@ -1,16 +1,17 @@
 import "./EditTemplate.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
 import TemplateContext from "../../context/TemplateContext";
+import Swal from "sweetalert2";
 
 
 export default function EditTemplate({logOut}) {
   const { tempId } = useParams();
 
-  const { handleupdate, getTemplateById } = useContext(TemplateContext);
-
+  const { handleupdate, returnTemplateById } = useContext(TemplateContext);
+const navigate = useNavigate();
   const [tempdata, settempdata] = useState({
     tempName: "",
     tempDate: "",
@@ -20,6 +21,14 @@ export default function EditTemplate({logOut}) {
     e.preventDefault();
 
     handleupdate(tempId, tempdata);
+    Swal.fire({
+      icon: "success",
+      title: "Updated!",
+      text: `${tempdata.tempName} has been updated.`,
+      showConfirmButton: false,
+      timer: 2000,
+    });
+    navigate("/template");
   };
 
   const handleChange = (e) => {
@@ -31,7 +40,7 @@ export default function EditTemplate({logOut}) {
   };
 
   async function getTemplate() {
-    const template = await getTemplateById(tempId);
+    const template = await returnTemplateById(tempId);
 
     settempdata(template.data);
   }

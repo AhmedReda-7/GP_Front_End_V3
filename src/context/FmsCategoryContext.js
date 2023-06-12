@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const FmsCategoryContext = createContext();
 
@@ -35,11 +36,40 @@ export function FmsCategoryContextProvider({ children }) {
       `https://localhost:44393/api/FmsDeleteCategory?id=${id}`
     );
   }
+  async function getAllcatdel() {
+    const allcat = await axios.get(
+      `https://localhost:44393/api/FmsGetAllCategories`
+    );
+    return allcat.data;
+  }
 
   const handleDelete = (id) => {
-    deleteCategory(id);
+    Swal.fire({
+      icon: "warning",
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          icon: "success",
+          title: "Deleted!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
 
-    getAllcategory();
+        deleteCategory(id);
+        setData(getAllcatdel());
+        setData(data.filter((employee) => employee.catId !== id));
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
+      }
+    });
   };
 
   async function updateCategory(id, updatedData) {
@@ -54,7 +84,12 @@ export function FmsCategoryContextProvider({ children }) {
 
     getAllcategory();
   };
-
+  async function returnCategoryById(id) {
+    const categoryObject = await axios.get(
+      `https://localhost:44393/api/FmsGetCategoryById/${id}`
+    );
+    return categoryObject;
+  }
   const valuetoshare = {
     data,
     detailData,
@@ -63,6 +98,7 @@ export function FmsCategoryContextProvider({ children }) {
     handleDelete,
     handleupdate,
     getCategoryById,
+    returnCategoryById,
   };
   return (
     <FmsCategoryContext.Provider value={valuetoshare}>

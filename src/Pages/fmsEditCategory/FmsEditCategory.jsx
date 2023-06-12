@@ -1,15 +1,17 @@
 import "./FmsEditCategory.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import { useContext, useEffect, useState } from "react";
 import FmsCategoryContext from "../../context/FmsCategoryContext";
+import Swal from "sweetalert2";
 
 export default function EditCategory({logOut}) {
   const { catId } = useParams();
 
-  const { handleupdate, getCategoryById } = useContext(FmsCategoryContext);
-
+  const { handleupdate, getCategoryById, returnCategoryById } =
+    useContext(FmsCategoryContext);
+const navigate = useNavigate();
   const [catdata, setcatdata] = useState({
     catName: "",
     catDescription: "",
@@ -19,6 +21,14 @@ export default function EditCategory({logOut}) {
     e.preventDefault();
 
     handleupdate(catId, catdata);
+        Swal.fire({
+          icon: "success",
+          title: "Updated!",
+          text: `${catdata.catName} has been updated.`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        navigate("/fmscategory");
   };
 
   const handleChange = (e) => {
@@ -30,7 +40,7 @@ export default function EditCategory({logOut}) {
   };
 
   async function getCategory() {
-    const category = await getCategoryById(catId);
+    const category = await returnCategoryById(catId);
 
     setcatdata(category.data);
   }

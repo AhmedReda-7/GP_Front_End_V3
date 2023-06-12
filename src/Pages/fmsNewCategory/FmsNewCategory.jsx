@@ -3,13 +3,15 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function FmsNewCategory({logOut}) {
   const [category, setcategory] = useState({
     catName: "",
     catDescription: "",
   });
-
+const navigate = useNavigate();
   const handleInputChange = (e) => {
     const categoryData = { ...category };
 
@@ -25,12 +27,20 @@ function FmsNewCategory({logOut}) {
       `https://localhost:44393/api/FmsAddCategory`,
       categoryData
     );
+    navigate("/fmscategory");
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     sendData();
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `distributor has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (

@@ -18,7 +18,6 @@ export default function ViewDistributionOrders() {
     distributorName: "",
     totalQty: 0,
     subTotal: 0,
-    shippingCost: 0,
     totalPrice: 0,
     orderStatusId: 0,
     orderStatus: "",
@@ -112,7 +111,7 @@ export default function ViewDistributionOrders() {
         <Navbar />
         <div className="manufactur">
           <div className="manufacturTitleContainer">
-            <h1 className="manufacturTitle">Distributor Order/{id}</h1>
+            <h1 className="manufacturTitle">Distributor Order/ {id}</h1>
             <Link to="/distributororders/neworder">
               <button className="manufacturAddButton">Order</button>
             </Link>
@@ -142,15 +141,11 @@ export default function ViewDistributionOrders() {
                   {distributorordersdata.subTotal}
                 </p>
                 <p className="paddorder">
-                  <span className="spanform">Shipping Cost: </span>
-                  {distributorordersdata.shippingCost}
-                </p>
-                <p className="paddorder">
                   <span className="spanform">Total Price: </span>
                   {distributorordersdata.totalPrice}
                 </p>
                 <p className="paddorder">
-                  <span className="spanform">order StatusId: </span>
+                  <span className="spanform">order Status Id: </span>
                   {distributorordersdata.orderStatusId}
                 </p>
                 <p className="paddorder">

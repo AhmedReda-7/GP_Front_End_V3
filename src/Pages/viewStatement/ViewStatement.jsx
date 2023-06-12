@@ -75,7 +75,7 @@ export default function ViewStatement({logOut}) {
       <Sidebar />
       <div className="listContainer">
         <Navbar logOut={logOut} />
-        <div className="datatable1">
+        <div className="datatable2">
           <div className="datatableTitle">
             Statement Name: {detailData.staName}
             <br></br>

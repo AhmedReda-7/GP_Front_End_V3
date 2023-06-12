@@ -6,7 +6,7 @@ const AccountContext = createContext();
 
 export function AccountContextProvider({ children }) {
   const [data, setData] = useState([]);
-  const [account,setAccount] = useState({})
+  const [account, setAccount] = useState({});
   const [detailData, setDetailData] = useState({
     accId: "",
     accBalance: account.accBalance,
@@ -31,6 +31,13 @@ export function AccountContextProvider({ children }) {
 
     setDetailData(accountObject.data);
     setAccount(accountObject.data);
+  }
+  async function returnAccountById(id) {
+    const accountObject = await axios.get(
+      `https://localhost:44393/api/FmsGetAccountById/${id}`
+    );
+
+    return accountObject;
   }
 
   async function deleteAccount(id) {
@@ -66,6 +73,7 @@ export function AccountContextProvider({ children }) {
     handleDelete,
     handleupdate,
     getAccountById,
+    returnAccountById,
   };
   return (
     <AccountContext.Provider value={valuetoshare}>

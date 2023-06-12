@@ -21,7 +21,7 @@ export default function Template({logOut}) {
 
       headerName: "Action",
 
-      width: 170,
+      width: 200,
 
       renderCell: (params) => {
         return (

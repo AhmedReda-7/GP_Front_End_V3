@@ -20,7 +20,7 @@ export default function Accounts({logOut}) {
 
       headerName: "Action",
 
-      width: 210,
+      width: 150,
 
       renderCell: (params) => {
         return (

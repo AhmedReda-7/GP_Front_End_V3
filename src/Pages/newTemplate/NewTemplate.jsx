@@ -4,9 +4,10 @@ import Navbar from "../../Components/navbar/Navbar";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import AccountContext from "../../context/AccountContext";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-function NewTemplate({logOut}) {
-
+function NewTemplate({ logOut }) {
   const [template, settemplate] = useState({
     tempName: "",
     tempDate: "",
@@ -16,11 +17,11 @@ function NewTemplate({logOut}) {
       },
     ],
   });
-
+  const navigate = useNavigate();
   const { data, getAllaccount } = useContext(AccountContext);
-  useEffect(() =>{
+  useEffect(() => {
     getAllaccount();
-  }, [])
+  }, []);
 
   const handleInputChange = (e) => {
     const templateData = { ...template };
@@ -32,7 +33,7 @@ function NewTemplate({logOut}) {
     const { value } = e.target;
     const templateData = { ...template };
     templateData.accounts[index].accId = value;
-    console.log(index)
+    console.log(index);
     settemplate(templateData);
   };
 
@@ -43,19 +44,20 @@ function NewTemplate({logOut}) {
       `https://localhost:44393/api/FmsAddtemplate`,
       templateData
     );
+    navigate("/template");
   }
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
     sendData();
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `Template has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
-
-
-
-  // console.log("######################")
-  // console.log(template);
 
   const newtempOrderOptions = data?.map((temp) => {
     return (
@@ -69,7 +71,7 @@ function NewTemplate({logOut}) {
     <div className="newProduct">
       <Sidebar />
       <div className="newContainer">
-        <Navbar logOut={logOut}/>
+        <Navbar logOut={logOut} />
         <div className="container">
           <h1 className="addProductTitle">New Template</h1>
           <form className="addProductForm" onSubmit={handleSubmit}>
@@ -96,8 +98,8 @@ function NewTemplate({logOut}) {
             <div>
               {template.accounts.map((account, index) => (
                 <div key={index}>
-                  <div>
-                    <label>Accounts</label>
+                  <div className="addProductItem">
+                    <label> Accounts </label>
                     <select
                       name="accId"
                       value={account.accId}

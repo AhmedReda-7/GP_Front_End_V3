@@ -2,7 +2,7 @@ import "./ViewTemplate.css";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { templateCoulm } from "../../dummyData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
@@ -10,15 +10,17 @@ import TemplateContext from "../../context/TemplateContext";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
-export default function ViewTemplate({logOut}) {
-  const { detailData, getTemplateById, handleDelete,template } =
+export default function ViewTemplate({ logOut }) {
+  const { detailData, getTemplateById, handleDelete, template } =
     useContext(TemplateContext);
   const { tempId } = useParams();
   useEffect(() => {
     getTemplateById(tempId);
   }, [tempId]);
-  
+  const navigate = useNavigate();
+console.log(template);
   const columnsaccount = [
     {
       field: "action",
@@ -61,11 +63,20 @@ export default function ViewTemplate({logOut}) {
       `https://localhost:44393/api/FmsAddTemplateAccount?tempID=${tempId}&accID=${Template.accId}`,
       TemplateData
     );
+        navigate("/template");
+
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     sendData();
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `Account has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
     window.location.reload();
   };
 
@@ -86,6 +97,15 @@ export default function ViewTemplate({logOut}) {
     const state = await axios.post(
       `https://localhost:44393/api/FmsAddStatement?templateID=${tempId}`
     );
+    Swal.fire({
+      icon: "success",
+      title: "Added!",
+      text: `Statement has been Added.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+        navigate("/statement");
+
   }
 
   const [Templates, setTemplates] = useState([]);
@@ -106,7 +126,7 @@ export default function ViewTemplate({logOut}) {
   };
 
   const names = template.map((name) => {
-    return name.accName
+    return name.accName;
   });
 
   return (
@@ -114,7 +134,7 @@ export default function ViewTemplate({logOut}) {
       <Sidebar />
       <div className="listContainer">
         <Navbar logOut={logOut} />
-        <div className="datatable1">
+        <div className="datatable2">
           <div className="row">
             <button onClick={addStatement}>Add New Statement</button>
           </div>
@@ -135,6 +155,8 @@ export default function ViewTemplate({logOut}) {
             disableSelectionOnClick
           />
         </div>
+        <br></br>
+        <br></br>
         <br></br>
         <br></br>
         <br></br>
@@ -160,10 +182,10 @@ export default function ViewTemplate({logOut}) {
           <h2>
             this Template is Listed in {AccountCategories.length} Accounts :
           </h2>
-          {AccountCategories.map((Template) => (
+          {AccountCategories.map((Template,index) => (
             <div className="AccountStatement">
               <h3>Account Id: {Template.accId}</h3>
-              <h3>Name: {names}</h3>
+              <h3>Name: {template[index].accName}</h3>
             </div>
           ))}
         </div>

@@ -139,16 +139,7 @@ function NewDistributionOrders() {
                 </select>
               </div>
 
-              <div className="formInput">
-                <label>shippingCost</label>
-                <input
-                  type="number"
-                  name="shippingCost"
-                  value={newDistOrder.shippingCost}
-                  onChange={handleChange}
-                  placeholder="$"
-                />
-              </div>
+              
 
               {newDistOrder.productsOrdered.map((material, indx) => (
                 <div key={indx}>
