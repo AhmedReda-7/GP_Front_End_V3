@@ -90,7 +90,7 @@ export const productRows = [
     price: "$120.00",
   },
 ];
- export const productData = [
+export const productData = [
   {
     name: "Jan",
     "Sales": 4000,
@@ -110,7 +110,7 @@ export const productCoulm = [
     field: "categoryName",
     headerName: "categoryName",
     width: 120,
-   
+
   },
   {
     field: "productName",
@@ -127,9 +127,9 @@ export const productCoulm = [
     field: "purchasePrice",
     headerName: "purchasePrice",
     width: 130,
-  
+
   },
-  
+
   {
     field: "salesPrice",
     headerName: "salesPrice",
@@ -148,13 +148,13 @@ export const productinventoryCoulm = [
     field: "productName",
     headerName: "productName",
     width: 120,
-   
+
   },
   {
     field: "quantity",
     headerName: "quantity",
     width: 80,
-   
+
   },
   {
     field: "shippingDate",
@@ -171,9 +171,9 @@ export const productinventoryCoulm = [
     field: "area",
     headerName: "area",
     width: 70,
-  
+
   },
-  
+
   {
     field: "reorderingPoint",
     headerName: "reorderingPoint",
@@ -186,13 +186,13 @@ export const productinventoryCoulm = [
   }
 
 ];
-export const categoryCoulm =[
+export const categoryCoulm = [
   { field: "categoryId", headerName: "categoryId", width: 100 },
   {
     field: "categoryName",
     headerName: "categoryName",
     width: 180,
-   
+
   },
   {
     field: "categoryDescription",
@@ -200,15 +200,15 @@ export const categoryCoulm =[
     width: 250,
   },
 
-  
+
 ];
-export const rawmatrialCoulm =[
+export const rawmatrialCoulm = [
   { field: "materialId", headerName: "materialId", width: 100 },
   {
     field: "materialName",
     headerName: "materialName",
     width: 150,
-   
+
   },
   {
     field: "materialDescription",
@@ -216,15 +216,15 @@ export const rawmatrialCoulm =[
     width: 250,
   },
 
-  
+
 ];
-export const rawmatrialinventoryCoulm =[
+export const rawmatrialinventoryCoulm = [
   { field: "materialId", headerName: "materialId", width: 100 },
   {
     field: "materialName",
     headerName: "materialName",
     width: 120,
-   
+
   },
   {
     field: "materialDescription",
@@ -262,12 +262,12 @@ export const rawmatrialinventoryCoulm =[
     width: 120,
   },
 
-  
+
 ];
-export const manufacturCoulm =[
+export const manufacturCoulm = [
   { field: "id", headerName: "id", width: 80 },
 
- 
+
   {
     field: "productManufacturedId",
     headerName: "productManufacturedId",
@@ -294,10 +294,10 @@ export const manufacturCoulm =[
     width: 180,
   }
 ];
-export const supporderCoulm =[
+export const supporderCoulm = [
   { field: "id", headerName: "id", width: 80 },
 
- 
+
   {
     field: "supplierId",
     headerName: "supplierId",
@@ -342,7 +342,7 @@ export const hrmanagerColumns = [
     field: "hrfullName",
     headerName: "hrfullName",
     width: 100,
-   
+
   },
   {
     field: "hrEmail",
@@ -528,7 +528,7 @@ export const distributorCoulm = [
     headerName: "Email",
     width: 300,
   },
-  
+
   {
     field: "address",
     headerName: "Address",
@@ -577,5 +577,80 @@ export const distributionOrdersCoulm = [
     field: "expectedArrivalDate",
     headerName: "expectedArrivalDate",
     width: 200,
+  },
+];
+
+export const customerColum = [
+  { field: "customerId", headerName: "Customer Id", width: 100 },
+  {
+    field: "fullName",
+    headerName: "Customer Name",
+    width: 100,
+
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    width: 150,
+  },
+
+  {
+    field: "phone",
+    headerName: "Phone Number",
+    width: 100,
+  },
+  {
+    field: "address",
+    headerName: "Address",
+    width: 100,
+
+  },
+
+  {
+    field: "sex",
+    headerName: "Sex",
+    width: 100,
+  },
+  {
+    field: "age",
+    headerName: "Age",
+    width: 100,
+  },
+
+];
+
+export const customerTaskColum = [
+  { field: "taskId", headerName: "Task Id", width: 100 },
+  {
+    field: "taskName",
+    headerName: "Task Name",
+    width: 100,
+
+  },
+  {
+    field: "taskDate",
+    headerName: "Task Date",
+    width: 150,
+  },
+
+  {
+    field: "taskDesc",
+    headerName: "Task Description",
+    width: 100,
+  },
+];
+
+export const customerTodoColum = [
+  { field: "toDoListId", headerName: "ToDo List Id", width: 100 },
+  {
+    field: "toDoListName",
+    headerName: "Todo List Name",
+    width: 100,
+
+  },
+  {
+    field: "toDoListDesc",
+    headerName: "Todo List Description",
+    width: 150,
   },
 ];
